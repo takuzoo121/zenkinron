@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A COURSE IN LARGE SAMPLE THEORY</title>
+    <link href="2page.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <!--<header>
+      <a href="1page.html#thema">前ページ</a>
+      <a href="#abs">概要</a>
+      <a href="#theorem1">1.中心極限定理</a>
+      <a href="#theorem2">2.例</a>
+      <a href="#theorem3">3.近似の改善</a>
+    </header>-->
+    <div class="container markdown-body">
+      <h1 id="thema">第5章 中心極限定理 </h1>
+
+      <div class="abstract border">
+        <h2 id="abs">概要</h2>
+        <ol>
+          <li>中心極限定理</li>
+          <p class="indent">定理の紹介と証明</p>
+          <p>1.1 定理5</p>
+          <p class="indent">i.i.dな確率ベクトルについての中心極限定理</p>
+          <p>1.2 リンドバーグ・フェラーの定理</p>
+          <p class="indent">独立だが同分布でない確率変数についての中心極限定理</p>
+          <li class="pad">例題</li>
+          <p class="indent">推定量,統計量が漸近正規性を持つことを示す。</p>
+          <p>2.1 例題5.1</p>
+          <p class="indent">回帰係数の最小二乗推定量(リンドバーグより)</p>
+          <p>2.2 例題5.2</p>
+          <p class="indent">一対比較のための確率化t検定のt統計量(リンドバーグより)</p>
+          <p>2.3 例題5.3</p>
+          <p class="indent">一対比較のための符号付き順位検定の符号付き順位統計量(例5.2より)</p>
+          <li class="pad">近似の改善</li>
+          <p>中心極限定理の収束が一様でない</p>
+          <p>3.1 ベリー・エシーンの定理</p>
+          <p class="indent">中心極限定理の近似誤差の上限</p>
+          <p>3.2 エッジワースの展開</p>
+          <p class="indent">近似精度の改善</p>
+        </ol>
+      </div>
+
+      <div class="contexts">
+        <h2 id="theorem1">1. 中心極限定理</h2>
+        <p>定理の紹介と証明</p>
+        <h3 id="jump1-1">1.1 定理5</h3>
+        <p>i.i.d.な確率ベクトルに成り立つ中心極限定理。</p>
+        <div class="border">
+          <p>\(\underline{中心極限定理}\)</p>
+          <p>\(\bf{X}_{1},\bf{X}_2,...\)はi.i.dな確率ベクトルで、
+            平均\(\bf{\mu}\)と有限な分散行列\(\bf{\Sigma}\)を持つとし、</p>
+          <p>\(\bar{\bf{X}}_{n}=(1/n)\sum_{j=1}^{n}\bf{X}_{\rm{j}}\)とおく。</p>
+          <p>このとき、\(\sqrt{n}(\overline{\bf{X}}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(\bf{0},\bf{\Sigma})\)である。</p>
+        </div>
+        <p id="click">(例)</p>
+        <div id="hide" class="border">
+          <p>1次元の中心極限定理</p>
+          <p>i.i.d.な確率変数\(X_{1},...,X_{n}\)の中心極限定理は、平均\(\mu\)と有限な分散\(\sigma^{2}\)を持つとし、</p>
+          <p>\(\sqrt{n}(\bar{X}_{n}-\mu)/\sigma\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(0,1)\)</p>
+          <p>で書ける。
+          ここで、\(\bar{X}_{n}=(1/n)\sum_{j=1}^{n}X_{j}\)である。</p>
+          <p>(例)</p>
+          <p>サイコロをn回振る試行を考える。</p>
+          <p>このとき、確率変数\(X_{j}\)をj回目のサイコロの目とする。</p>
+          <p>\(X_{1},...,X_{n}\)はi.i.d.な確率変数であり、</p>
+          <p>\(E[X_{j}]=7/2,V(X_{j})=35/12<\infty\)を持つ。</p>
+          <p>よって、\(\sqrt{n}(\bar{X}_{n}-7/2)/\sqrt{35/12}\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(0,1)\)
+             が成り立つ。</p>
+          <p>\((X-\mu)/\sigma\sim\mathcal{N}(0,1)\)\(\leftrightarrow\)\(X\sim\mathcal{N}(\mu,\sigma^2)\)なので、</p>
+          <p>\(\bar{X}_{n}\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(7/2,\frac{35/12}{n})\)が成り立つ。</p>
+          <p>ここで、\(\bar{X}=\sum_{j=1}^{n}X_{j}\)とすると、\((1/n)\bar{X}\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(7/2,\frac{35/12}{n})\)が成り立つ。</p>
+          <p>\(aX+b\sim\mathcal{N}(a\mu+b,a^{2}\sigma^{2})\)\(\leftrightarrow\)\(X\sim\mathcal{N}(\mu,\sigma^{2})\)なので、</p>
+          <p>\(\bar{X}\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}((7/2)n,(35/12)n)\)が成り立つ。</p>
+          <img class="graph3" src="center.png">
+          <img class="graph3" src="hyo.png">
+          <p>\(E[\bar{X}]=(7/2)n,V(\bar{X})=(35/12)n\)より、</p>
+          <p>中心極限定理はi.i.d.な確率変数の和がその平均と分散を持つ正規分布で</p>
+          <p>近似できることをいっている。</p>
+          <p id="click2">(戻す)</p>
+        </div>
+        <div id="proof1">
+          <a href="proof1.html"><h4 id="pf1">[証明]</h4></a>
+        </div>
+        <h4>(証明条件)</h4>
+        <div class="border">
+          <p>\(\underline{法則収束}\)(1章)</p>
+          <p>確率ベクトル\(\bf{X}\)の分布関数\(F_{\bf{X}}\)の任意の連続点\(\bf{x}\)において</p>
+          <p>\(F_{\bf{X}_{n}}(\bf{x})\to \it{F}_{\bf{X}}(\bf{x})\)が成り立つとき、\(\bf{X}_{n}\)は\(\bf{X}\)に法則収束するという。</p>
+        </div>
+        <div class="border">
+          <p>\(\underline{連続定理}\)(3章)</p>
+          <p>\(\bf{X}_{n}\stackrel{\mathcal{L}}{\longrightarrow}\bf{X}\)
+              \(\Leftrightarrow\) 任意の\(\bf{t}\in \mathbb{R}^{\rm{d}}\)に対して
+              \(\varphi_{\bf{X}_{n}}(\bf{t})\to \varphi_{\bf{X}}(\bf{t})\)</p>
+          <!-- <p>確率ベクトル\(\sqrt{n}(\overline{X}_{n}-\mu)\)に対する、
+            任意の特性関数\(\varphi\)が正規分布\(\mathcal{N}(0,\Sigma)\)の特性関数に収束することを示す。</p>-->
+        </div>
+        <div class="border">
+          <p>\(\underline{特性関数}\)(4章)</p>
+          <p>任意の\(\bf{X}\in\mathbb{R}^{\rm{d}}\)と\(\bf{t}\in\mathbb{R}^{\rm{d}}\)に対して、特性関数は</p>
+          <p>\begin{align*}
+              \varphi_{\bf{X}}(\bf{t}) & = E[\mathrm{e}^{i\bf{t}^{T}\bf{X}}]\\
+                             & = \int_{-\infty}^{\infty}e^{itx}f_{X}(x)dx
+           \end{align*}</p>と定義される。
+           <p>性質</p>
+           <ol>
+             <li>スカラー\(b\neq 0\)に対して、\(\varphi_{\bf{X}/\rm{b}}(\bf{t})\rm{=}\varphi_{\bf{X}}(\bf{t}/\rm{b})\)</li>
+             <li>\(\bf{X}\)と\(\bf{Y}\)が独立のとき、\( \varphi_{\bf{X}+Y}(\bf{t}) \)\(\rm{=}\varphi_{\bf{X}}(\bf{t})\varphi_{\bf{Y}}(\bf{t})\)</li>
+             <li>\(\varphi_{\bf{X}}(\bf{0})\rm{=}\rm{1}\)</li>
+             <li>\(E[|\bf{X}|^\rm{2}]<\infty\)ならば、\(\ddot{\varphi}_{\bf{X}}(\bf{t})\)が存在し、連続であり、
+                  \(\dot{\varphi}_{\bf{X}}(\bf{0})\rm{=}i\bf{\mu}^{T}\)である。
+                 <p>ただし、\(\bf{\mu}\rm{=}E[\bf{X}]\)</p></li>
+             <li>\(E[|\bf{X}|^\rm{2}]<\infty\)ならば、\(\ddot{\varphi}_{\bf{X}}(\bf{t})\)が存在し、連続であり、
+                  \(\ddot{\varphi}_{\bf{X}}(\bf{0})\rm{=}-E[\bf{X}\bf{X}^{T}]\)
+                  である。</li>
+             <li>\(\bf{X}\in \mathcal{N}(0,\Sigma)\)のとき、\(\varphi_{\bf{X}}(\bf{t}\rm{)=}\exp(-\frac{1}{2}\bf{t}^{T}\Sigma\bf{t}\rm{)}\)</li>
+           </ol>
+        </div>
+        <div class="border">
+          <p>\(\underline{テイラー展開}\)(4章)</p>
+          <p>f:\(\mathbb{R}^{d}\to \mathbb{R}\)であり、\(\ddot{f}(\bf{x})\)が{\(\bf{x}\rm{:|}\bf{x}-\bf{x}_{0}\rm{|} < r \)}において連続ならば、</p>
+          <p>\(|\bf{t}| \rm{<} r\)において、</p>
+          <p>\begin{align*}
+              f(\bf{x}_{0} \rm{+} \bf{t}\rm{)} \rm{=} f(\bf{x}_{0}\rm{)+}\dot{f}(\bf{x}_0)\bf{t}\rm{+}\bf{t}^{T} (\int_{0}^{1}\int_{0}^{1}\rm{v}\ddot{f}(\bf{x}_{0}\rm{+uv}\bf{t})\rm{dudv)}\bf{t}
+              \end{align*}</p>
+        </div>
+        <div class="border">
+          <p>\(\underline{複素数列の収束}\)</p>
+          <p>\(\lim_{n\to\infty}na_{n}\)が存在するような複素数列\(a_{n}\)においては、</p>
+          <p>\((1+a_{n})^{n}\to \exp(\lim_{n\to\infty}na_{n})\)である。</p>
+        </div>
+        <div class="context">
+          <h3 id="jump1-2">1.2 リンドバーグ・フェラーの定理</h3>
+          <p>独立で同分布でない確率変数について成り立つ中心極限定理。</p>
+            <div class="border">
+              <p>\(\underline{リンドバーグ・フェラーの定理}\)</p>
+              <p>\begin{align*}
+                  \left(
+                    \begin{array}{cccc}
+                      X_{11} &  &  & \\
+                      X_{21} & X_{22} &  & \\
+                      \vdots & \vdots & \ddots & \\
+                      X_{n1} & X_{n2} & \cdots & X_{nn}\\
+                    \end{array}
+                  \right)
+                 \end{align*}
+              </p>
+              <p>\(n=1,2,...\)に対して、\(X_{nj},j=1,2,...n\)は独立な確率変数列であり、</p>
+              <p>\(E[X_{nj}]=0\)かつ\(V(X_{nj})=\sigma_{nj}^2<\infty\)であるとする。</p>
+              <p>\(Z_{n}=\sum_{j=1}^n X_{nj}, B_{n}^2=V(Z_{n})=\sum_{j=1}^{n}\sigma_{nj}^2\)とおく。</p>
+              <p>このとき、任意の\(\varepsilon \)に対して、リンドバーク条件</p>
+              <p>\begin{align*}
+                  \frac{1}{B_{n}^2}\sum_{j=1}^{n}E[X_{nj}^{2} I(|X_{nj}|\geq \varepsilon B_{n})]\to 0 \ \ (n\to\infty)
+                  \end{align*}
+              </p>
+              <p>が成り立てば、\(Z_{n}/B_{n}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\)である。</p>
+              <p>逆に、\(Z_{n}/B_{n}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\)であるとき、さらに\((1/B_{n}^2)\max_{i\leq n}\sigma_{ni}^2\to 0(n\to\infty)\)</p>
+              <p>であれば(つまり、\(B_{n}^2\)の特定の項が極限に大きな影響を与えることがないならば)、</p>
+              <p>リンドバーグ条件が成り立つ。</p>
+            </div>
+        </div>
+      </div>
+      <div class="contexts">
+        <h2 id="theorem2">2. 例</h2>
+        <p>推定量,統計量が漸近正規性をもつことを示す。</p>
+        <!--<div class="context">-->
+          <h3 id="exm1">2.1 例5.1</h3>
+          <h3>回帰係数の最小2乗推定量の漸近正規性への応用</h3>
+          <h4>問題</h4>
+          <p>i=1,2,...に対して、\(X_{i}=\alpha + \beta z_{i} + e_{i}\)と仮定する。</p>
+          <p>ただし、\(z_{i}\)は必ずしも等しくない既知の定数で、</p>
+          <p>\(e_{i}\)は平均0と共通の分散\(\sigma^2<\infty\)を持つ互いに独立な確率変数である。</p>
+          <p>演習問題4.1によると、\(\beta\)の最小2乗推定量\(\hat{\beta}_{n}\)は、</p>
+          <p>\(\sum_{i=1}^{n}(z_{i}-\bar{z}_{n})^2\to\infty(n\to\infty)\)が成り立つとき一致推定量である。</p>
+          <p>ここでは、条件を強めて、</p>
+          <p>(a)\(e_{i}\)は同じ分布に従う。</p>
+          <p>(b)\(\frac{\max_{i\leq n}(z_{i}-\bar{z}_{n})^2}{\sum_{i=1}^{n}(z_{i}-\bar{z}_{n})^2}\to 0(n\to\infty)\)</p>
+          <p>を仮定する。</p>
+          <p>このとき、\(\hat{\beta}_{n}\)が漸近正規性を持つことをリンドバーグ・フェラーの定理より示す。</p>
+          <div id="proof2">
+            <a href="proof2.html"><h4>[証明]</h4></a>
+          </div>
+          <h4>(証明条件)</h4>
+          <div class="border">
+            <p>\(\underline{漸近正規性}\)</p>
+            <p>推定量の分布が正規分布に近似できる性質。</p>
+          </div>
+          <div class="border">
+            <p>\(\underline{演習4.1}\)</p>
+            <p>既知の\(z_{1},...,z_{n}\)に対して、\(X_{1},...,X_{n}\)は独立で、</p>
+            <p>線形回帰\(E(X_{j})=\alpha+\beta z_{j}\)で平均が与えられ、</p>
+            <p>一定の分散\(V(X_{j})=\sigma^{2}\)をもつとする。</p>
+            <p>\(X_{1},...,X_{n}\)に基づく\(\alpha,\beta\)の最小2乗推定量は</p>
+            <p>\begin{align*}
+                  L&=\sum_{j=1}^{n}[X_{j}-(\alpha+\beta z_{j})]^{2}\\
+                  \frac{\partial L}{\partial \alpha} &= -2\sum_{j=1}^{n}[X_{j}-(\alpha+\beta z_{j})] = 0\\
+                  \frac{\partial L}{\partial \beta} &= -2\sum_{j=1}^{n}[X_{j}-(\alpha+\beta z_{j})]z_{j} =0
+                \end{align*}
+            </p>を解くと、
+            <p>\begin{align*}
+                  \hat{\beta}_{n} &= \frac{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})}{\sum_{j=1}^{n}(z_{j}-\hat{z}_{n})^2}X_{j}\\
+                  \hat{\alpha}_{n} &= \bar{X}_{n}-\hat{\beta}_{n}\bar{z}_{n}
+                \end{align*}
+            </p>で与えられる。ただし、\(\bar{z}_{n}=(1/n)\sum_{j=1}^{n}z_{j},\bar{X}_{n}=(1/n)\sum_{j=1}^{n}X_{j}\)である。
+            <p>(a)\(z_{1},...,z_{n}\)に関するどのような条件の下で、\(\hat{\beta}_{n}\)が\(\beta\)の一致推定量となるか?</p>
+            <p><a href="https://ja.wikipedia.org/wiki/%E3%82%AC%E3%82%A6%E3%82%B9%EF%BC%9D%E3%83%9E%E3%83%AB%E3%82%B3%E3%83%95%E3%81%AE%E5%AE%9A%E7%90%86">ガウス・マルコフの定理</a>より、この推定量は不偏推定量となるので、</p>
+            <p>\(\hat{\beta}_{n}\)の平均は</p>
+            <p>\begin{align*}
+                 E[\hat{\beta}_{n}]=\frac{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})(\alpha+\beta z_{j})}{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}}=\beta
+                \end{align*}
+            </p>が成り立つ。
+            <p>また分散は</p>
+            <p>\begin{align*}
+                  V(\hat{\beta}_{n})=\frac{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}\sigma^{2}}{(\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2})^{2}}=\frac{\sigma^{2}}{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}}
+                \end{align*}
+            </p>となるので、
+            <p>\(\hat{\beta}_{n}\)が一致推定量になるための必要十分条件は\(\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}\to \infty\)である。</p>
+          </div>
+          <!--<div class="border">
+            <p>\(\underline{最小2乗推定量}\)</p>
+            <p>演習問題4.1より、\(\beta\)の最小2乗推定量は</p>
+            <p>\begin{align*}
+                \hat{\beta}_{n}=\frac{\sum_{i=1}^{n}X_{i}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\bar{z}_{n})^2}
+                \end{align*}</p>
+            <p>で書ける。</p>
+          </div>-->
+          <div class="border">
+            <p>\(\underline{定義関数の期待値}\)</p>
+            <p>\(e_{j}\)を確率変数、\(f(e_{j})\)を密度関数、aを定数とする。</p>
+            <p>このとき</p>
+            <p>\begin{align*}
+                E[e_{j}^2I(|e_{j}| \geq a)] = \int_{|e_{j}| \geq a} e_{j}^2 f(e_{j})de_{j}
+               \end{align*}
+            </p>
+            <p>である。</p>
+          </div>
+          <div class="border">
+            <p>\(\underline{同一分布の期待値}\)</p>
+            <p>i=1,2,...に対して、確率変数\(e_{j}\)は同じ分布に従うとし、\(z_{j\)を定数とする。</p>
+            <p>このとき</p>
+            <p>\begin{align*}
+                \sum_{j=1}^{n}z_{j}E[e_{j}] = E[e]\sum_{j=1}^{n}z_{j}
+               \end{align*}
+            </p>
+            <p>である。</p>
+          </div>
+        <!--</div>-->
+        <div class="context">
+          <h3 id="exm2">2.2 例題5.2</h3>
+          <h3>一対比較のための確率化t検定</h3>
+          <h4>定義</h4>
+          <div class="border">
+            <p>\(\underline{一対比較実験}\)</p>
+            <p>処置と対照を比較するための一対比較実験では、</p>
+            <p>2n実験単位を2実験単位ずつのnグループに分ける。</p>
+            <p>各グループの中の2実験単位はできるだけ同じものを選ぶ。</p>
+            <p>各グループで、どちらの実験単位が処置に使われるか、</p>
+            <p>対照に使われるかはランダムに選ばれる。</p>
+            <p>j=1,2,...,nに対して、\( (X_{j},Y_{j})\)でj番目の測定結果を表し、</p>
+            <p>\(X_{j}\)は処置結果,\(Y_{j}\)は対照結果を表す。</p>
+            <p id="click3">(例1)</p>
+            <p id="hide3"><img class="graph2" src="paired.png"></p>
+            <p id="click4">(例2)</p>
+            <div id="hide4">
+              <p>因果推論の文脈において</p>
+              <p>目的：ある薬が病気を治すのに役立つか知りたい</p>
+              <p>パラメータ：性別,年齢,体重,...</p>
+              <p><img class="graph4" src="table2.png"></p>
+              <p>できるだけこれらのパラメータが同じ人を2人選ぶ(Aさん,Gさん)。</p>
+              <p>どちらかに薬を処方し(処置群)、どちらかに薬を処方しない(対照群)。</p>
+              <p>治るまでにかかった日数を処置結果,対照結果とすると、</p>
+              <p>比較して処置結果の方が短いと効果ある。</p>
+            </div>
+          </div>
+          <div class="border">
+            <p>\(\underline{一対比較t検定}\)</p>
+            <p>処置と対照を比較するための通常の一対比較t検定では、</p>
+            <p>\(Z_{j}=X_{j}-Y_{j}\)がi.i.d.で有限な分散を持つと仮定する。</p>
+            <p>処置と対照の間に差異がない(\(X_{j}\)と\(Y_{j}\)が同一分布に従う)という仮説\(H_{0}\)は、</p>
+            <p>\(Z_{j}\)の分布が原点に関して対称であるという仮説に等しい。</p>
+            <p>仮説\(H_{0}\)の検定は一般に一標本t統計量に基づく。</p>
+            <p>(補足)</p>
+            <p>因果推論における一対比較実験では、\(X_{j},Y_{j}\)に正規分布を仮定して、</p>
+            <p>互いの分散を等しいとする。</p>
+            <p>それで、平均について差異がないかt検定で確かめるっぽい。</p>
+            <p>参考：統計的因果推論　岩崎学　朝倉書店　p40〜49</p>
+          </div>
+          <div class="border">
+            <p>\(\underline{一標本t統計量}\)</p>
+            <p>母平均と標本平均に差があるか調べる。</p>
+            <p>帰無仮説\(H_{0}\)：母平均(=0)と標本平均には差はない。</p>
+            <p>t統計量</p>
+            <p>\begin{align*}
+                t &= \frac{標本平均-母平均}{\sqrt{不偏分散/データ数}}\\
+                  &= \frac{\bar{Z}_{n}-0}{\sqrt{\frac{1}{n-1}\sum_{j=1}^{n}(Z_{j}-\bar{Z}_{n})^2/n}}\\
+                  &= \sqrt{n-1}\bar{Z}_{n}/s_{z}\\
+                  &=\sqrt{n-1}(\bar{X}_{n}-\bar{Y}_{n})/s_{z}
+              \end{align*}
+            </p>
+            <p>ここで、\(\bar{Z}_{n}\)は標本平均であり、\(\bar{Z}_{n}=\frac{1}{n}\sum_{j=1}^{n}Z_{j}\)で、</p>
+            <p>\(s_{z}\)は標本の標準偏差であり、\(s_{z}^2=(1/n)\sum_{j=1}^{n}(Z_{j}-\bar{Z}_{n})^2\)である。</p>
+            <p>\(Z_{j}\)がi.i.d.であり、正規分布に従うなら、t統計量は自由度n-1のt分布に従う。</p>
+            <img class="graph2" src="t2.jpg">
+            <img class="graph2" src="t3.jpg">
+          </div>
+          <div class="border">
+            <p>\(\underline{確率化検定(あるいは並び替え検定)}\)</p>
+            <p>確率化検定においても、同じ帰無仮説\(H_{0}\)(\(Z_{j}\)の分布が原点に対称)を</p>
+            <p>棄却するべきか判断できる。</p>
+            <p>処置と対照のペアの割り当てが独立かつ無作為であるという事実のみに基づき、</p>
+            <p>\(Z_{j}\)の観測値\(z_{j}\)が与えられると、それら(観測値)の条件付きでの解析がなされる。</p>
+            <p>このため、確率変数\(Z_{j}\)(\(|Z_{j}|=|z_{j}|\)の条件を持つ)は仮説\(H_{0}\)のもとで独立で、</p>
+            <p>\(P(Z_{j}=+|z_{j}|)=P(Z_{j}=-|z_{j}|)=\frac{1}{2}\)の分布を持つと仮定される。</p>
+            <p>それゆえ、仮説\(H_{0}\)のもとで、ベクトル\((Z_{1},...,Z_{n})\)は\(2^{{n}}\)個の値</p>
+            <p>\((\pm|z_{1}|,...,\pm|z_{n}|)\)を等確率で取り、</p>
+            <p>\begin{align*}
+                P(+|z_{1}|,...,+|z_{n}|)=...=P(-|z_{1}|,...,-|z_{n}|)=\left(\frac{1}{2} \right)^{n}
+                \end{align*}
+            </p>となる。
+            <!--<p>\((Z_{1},...,Z_{n})\)に基づく全ての統計量もたかだか\(2^n\)個の値しか取りえない。</p>-->
+          </div>
+          <h4>問題</h4>
+          <p>確率化t検定でも1標本t統計量\(t=\sqrt{n-1}\bar{Z}_{n}/s_{z}\)を用いる。</p>
+          <p>しかし、棄却判断にはt分布は使わず、\((Z_{1},...,Z_{n})\)の等しく取りうる</p>
+          <p>\(2^{n}\)個の値から導かれる離散分布を用いる。</p>
+          <p>nが小さい場合は、\(2^{n}\)個の全ての値に対してt値を計算し、その分布を求める。</p>
+          <p>nが大きい場合は、モンテカルロ法を用いて近似的に求める方法と、</p>
+          <p>無作為化された帰無仮説\(H_{0}\)のもとでのt統計量の大標本分布を求める方法がある。</p>
+          <p>ここでは、nが大きい場合の後半の方法に関して、</p>
+          <p>t統計量が漸近正規性を持つことをリンドバーグ・フェラーの定理より示す。</p>
+          <p>ただし、仮定として確率変数\(Z_{j}\)の観測値\(z_{j}\)について、</p>
+          <p>\begin{align*}
+                \frac{\max_{j\leq n}z_{j}^2}{\sum_{j=1}^{n}z_{j}^2}\to 0\ \ \ (n\to\infty)
+              \end{align*}
+          </p>が成り立つ場合を考える。
+          <div id="proof3">
+            <a href="proof3.html"><h4>[証明]</h4></a>
+          </div>
+          <h4>(証明条件)</h4>
+          <div class="border">
+            <p>\(\underline{リンドバーグ・フェラーの定理の記号法との比較}\)</p>
+            <p>(リンドバーグ・フェラーの定理)</p>
+            <p>確率変数\(X_{nj}(j=1,...,n)\)が独立で、</p>
+            <p>\(E[X_{nj}]=0\)かつ\(V(X_{nj})=\sigma_{nj}^2\)である。</p>
+            <p>\(Z_{n}=\sum_{j=1}^{n}X_{nj},B_{n}^{2}=V(Z_{n})=\sum_{j=1}^{n}\sigma_{nj}^{2}\)とおく。</p>
+            <p>このとき、任意の\(\varepsilon>0\)に対して</p>
+            <p>\begin{align*}
+                \frac{1}{B_{n}^2}\sum_{j=1}^{n}E[X_{nj}^{2} I(|X_{nj}|\geq \varepsilon B_{n})]\to 0 \ \ (n\to\infty)
+                \end{align*}
+            </p>が成り立てば、\(Z_{n}/B_{n}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\)である。</p>
+            <p>(例題5.2)</p>
+            <p>確率変数\(Z_{j}(j=1,...,n)\)が独立で、</p>
+            <p>\(E[Z_{j}]=(1/2)|z_{j}|+(1/2)(-|z_{j}|)=0\)かつ</p>
+            <p>\(V(Z_{j})=(1/2)|z_{j}|^{2}+(1/2)(-|z_{j}|)^{2}=z_{j}^{2}\)である。</p>
+            <p>\(B_{n}^{2}=V(\sum_{j=1}^{n}Z_{j})=\sum_{j=1}^{n}z_{j}^2\)とおく。</p>
+            <p>このとき、任意の\(\varepsilon>0\)に対して</p>
+            <p>\begin{align*}
+              \frac{1}{B_{n}^2}\sum_{j=1}^{n}E[Z_{j}^{2} I(|Z_{j}|\geq \varepsilon B_{n})]\to 0 \ \ (n\to\infty)
+              \end{align*}
+            </p>が成り立てば、\(\sum_{j=1}^{n}Z_{j}/B_{n}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\)である。
+            <p>ここで、\(\sum_{j=1}^{n}Z_{j}/B_{n}\)は以下のように変形できる。</p>
+            <p>\begin{align*}
+                  \sum_{j=1}^{n}Z_{j}/B_{n} = \sqrt{n}\bar{Z}_{n}/\sigma_{n}
+                \end{align*}
+            </p>ここで、\(\sigma^{2}=(1/n)\sum_{j=1}^{n}z_{j}^{2}\)である。</p>
+            <p>(これは、t統計量の形に寄せてる。)</p>
+          </div>
+          <div class="border">
+            <p>\(\underline{t統計量(=\sqrt{n-1}\bar{Z}_{n}/s_{z})と統計量\sqrt{n}\bar{Z}_{n}/\sigma_{n}の同値性}\)</p>
+            <p>\(t=\sqrt{n-1}\bar{Z}_{n}/s_{z},v=\sqrt{n}\bar{Z}_{n}/\sigma_{n}\)とおく。</p>
+            <p>\(s_{z}=\sqrt{(1/n)\sum_{j=1}^{n}(Z_{j}-\bar{Z}_{n})^{2}}>0,\sigma_{n}=\sqrt{(1/n)\sum_{j=1}^{n}z_{j}^{2}}>0\)より、</p>
+            <p>tとvは同じ符号をもち、さらに</p>
+            <p>\begin{align*}
+                s_{z}^{2} &= \frac{1}{n}\sum_{j=1}^{n}(Z_{j}-\bar{Z}_{n})^{2}\\
+                          &= \frac{1}{n}\sum_{j=1}^{n}Z_{j}^{2}-\frac{2}{n}\bar{Z}_{n}\sum_{j=1}^{n}Z_{j}+\bar{Z}_{n}^{2}\\
+                          &= \frac{1}{n}\sum_{j=1}^{n}z_{j}^{2}-\frac{2}{n}\bar{Z}_{n}n\bar{Z}_{n}+\bar{Z}_{n}^{2}\\
+                          &= \sigma_{n}^2 - \bar{Z}_{n}^{2}\\
+                  v^2 &= n\frac{\bar{Z}_{n}^{2}}{\sigma_{n}^2}\\
+                      &= n\frac{\bar{Z}_{n}^{2}}{(s_{z}^2+\bar{Z}_{n}^2)}\\
+                      &= n\frac{\bar{Z}_{n}^2/s_{z}^2}{(1+\bar{Z}_{n}^2/s_{z}^2)}\\
+                      &= n\frac{t^2}{((n-1)+t^2)}\\
+                      &= n\left(\frac{n-1}{t^2}+1\right)^{-1}
+                \end{align*}
+            </p>が成り立つことより、tはvの増加関数となる。
+          </div>
+          <p>なぜ増加関数で同値?</p>
+        </div>
+        <div class="context">
+          <h3 id="exm3">2.3 例5.3</h3>
+          <h3>一対比較のための符号付き順位検定</h3>
+          <h4>定義</h4>
+          <div class="border">
+            <p>\(\underline{符号付き順位検定}\)</p>
+            <p>確率化t検定と同じ仮定の下に基づく。</p>
+            <p>つまり、\(Z_{j}\)の観測値\(z_{j}\)が与えられると、それら(観測値)の条件付きでの</p>
+            <p>解析がなされる。</p>
+            <p>このため、確率変数\(Z_{j}\)(\(|Z_{j}|=|z_{j}|\)の条件を持つ)は仮説\(H_{0}\)のもとで独立で、</p>
+            <p>\(P(Z_{j}=+|z_{j}|)=P(Z_{j}=-|z_{j}|)=\frac{1}{2}\)の分布をもつ。</p>
+            <p>\(\underline{符号付き順位統計量}\)</p>
+            <p>\(|z_{1}|,...,|z_{n}|\)を最小値から最大値へと並べたときの\(|z_{j}|\)の順位を\(R_{j}\)とする。</p>
+            <p>(ここでは、\(|z_{j}|\)はすべて異なり、どの\(|z_{j}|\)も0でないとする。)</p>
+            <p>このとき、符号付き順位検定量\(W_{+}\)は、正値をとる\(Z_{j}\)に対する順位\(R_{j}\)の和であり、</p>
+            <p>\begin{align*}
+                W_{+}=\sum_{j=1}^{n}R_{j}I(Z_{j}>0)
+                \end{align*}
+            </p>と書ける。
+            <p>\(0<|z_{1}|<|z_{2}|<...<|z_{n}|\)であるように、\(Z_{j}\)の添え字を付け直すと、</p>
+            <p>\(W_{+}=\sum_{j=1}^{n}iI(Z_{j}>0)\)と書ける。</p>
+            <p>\(H_{0}\)の下で、\(I(Z_{j}>0)\)はi.i.d.なベルヌーイ確率変数で、</p>
+            <p>0または1をとる確率は互いに等しい。</p>
+            <p>(\(P(Z_{j}=+|z_{j}|)=P(Z_{j}=-|z_{j}|)=\frac{1}{2}\)より)</p>
+          </div>
+          <h4>問題</h4>
+          <p>符号付き順位統計量\(W_{+}\)が漸近正規性を持つことを例題5.2を用いて示す。</p>
+          <div id="proof4">
+            <a href="proof4.html"><h4>[証明]</h4></a>
+          </div>
+          <h4>(証明条件)</h4>
+          <div class="border">
+              <p>\(\underline{例題5.2の仮定}\)</p>
+              <p>確率変数\(Z_{j}\)の観測値\(z_{j}\)について、</p>
+              <p>\begin{align*}
+                    \frac{\max_{j\leq n}z_{j}^2}{\sum_{j=1}^{n}z_{j}^2}\to 0\ \ \ (n\to\infty)
+                  \end{align*}
+              </p>が成り立つ。
+          </div>
+          <div class="border">
+              <p>\(\underline{平均}\)</p>
+              <p>\begin{align*}
+                    E[W_{+}] &= \sum_{j=1}^{n}iE[I(Z_{j}>0)]\\
+                             &= \frac{1}{2}\sum_{j=1}^{n}j\\
+                             &= \frac{n(n+1)}{4}
+                  \end{align*}
+              </p>
+              <p>\(\underline{分散}\)</p>
+              <p>\begin{align*}
+                    &V(W_{+})\\
+                             = &E[(W_{+}-E[W_{+}])^{2}]\\
+                             = &E[W_{+}^{2}]-E[W_{+}]^{2}\\
+                             = &E[(\sum_{j=1}^{n}jI(z_{j}>0))^2]-(\frac{1}{2}\sum_{j=1}^{n}j)^{2}\\
+                             = &\sum_{j=1}^{n}j^{2}E[I(z_{j}>0)]+2\sum_{j=1}^{n}\sum_{i=1}^{n}jiE[I(z_{j}>0)]E[I(z_{i}>0)]-\frac{1}{4}(\sum_{j=1}^{n}j)^{2}\\
+                             = &\frac{1}{2}\sum_{j=1}^{n}j^{2}+\frac{1}{2}\sum_{j=1}^{n}\sum_{i=1}^{n}ji-\frac{1}{4}(\sum_{j=1}^{n}j^{2}+2\sum_{j=1}^{n}\sum_{i=1}^{n}ji)\\
+                             = &\frac{1}{4}\sum_{j=1}^{n}j^{2}\\
+                             = &\frac{n(n+1)(2n+1)}{24}
+                  \end{align*}
+              </p>
+          </div>
+        </div>
+      </div>
+      <div class="contexts bottom">
+        <h2 id="theorem3">3. 近似の改善</h2>
+        <p>中心極限定理の収束は、仮定する分布に依存し、一様ではない。</p>
+        <p>標本数nを固定すると、\(\sqrt{n}(\bar{X}_{n}-\mu)\)の分布への正規近似が悪い分布が存在する。</p>
+        <p>しかし、\(E[|X-\mu|^3]/\sigma^{3}\)が有界であるような分布族において、</p>
+        <p>中心極限定理の近似誤差の上界が存在して、収束が一様であることが示せる。</p>
+        <p>ここでは、1次元の場合の定理を紹介します。</p>
+        <h3 id="jump3-1">3.1 ベリー・エシーンの定理</h3>
+        <p>中心極限定理の近似誤差の上限についての定理。</p>
+        <div class="border">
+          <p>\(\underline{ベリー・エシーンの定理}\)</p>
+          <p>\(X_{1},X_{2},...,X_{n}\)はi.i.d.で、平均\(\mu\),分散\(\sigma^2>0\),</p>
+          <p>及び絶対3次モーメント\(\rho=E[|X-\mu|^3]<\infty\)を持つと仮定する。</p>
+          <p>このとき、任意の\(x\in\mathbb{R}\)と任意の\(n\geq1\)において次が成り立つ。</p>
+          <p>\begin{align*}
+            |F_{n}(x)-\Phi(x)| < \frac{c\rho}{\sqrt{n}\sigma^3}
+            \end{align*}
+          </p>
+          <p>ただし、\(F_{n}(x)\)は\(\sqrt{n}(\bar{X}_{n}-\mu)/\sigma\)の分布関数であり、</p>
+          <p>\(\Phi(x)\)は\(\mathcal{N}(0,1)\)の分布関数である。</p>
+          <p>cは定数であり、0.4097より大きく0.7975よりは小さいことがわかっている。</p>
+        </div>
+        <div class="border">
+          <p>\(\underline{モーメント(積率)}\)</p>
+          <p>Xを確率変数、\(\alpha\)を定数としたときに、\(\alpha\)に関するn次モーメントは</p>
+          <p>\(E[(X-\alpha)^{n}]\)で定義される。</p>
+        </div>
+        <div class="border">
+          <p>一次元の中心極限定理</p>
+          <p>\(X_{1},X_{2},...,X_{n}\)はi.i.d.な確率変数で、平均\(\mu\),有限な分散\(\sigma^2\)を持つとする。</p>
+          <p>このとき、\(\sqrt{n}(\bar{X}_{n}-\mu)/\sigma\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(0,1)\)である。</p>
+        </div>
+        <h3 id="jump3-2">3.2 エッジワース展開</h3>
+        <p>仮定している分布の3次及び4次のモーメントに関する情報があるとき、</p>
+        <p>特性関数を展開した高次の項を考慮することで、正規近似を改善できる。</p>
+        <div class="border">
+          <p>\(\underline{エッジワース展開}\)</p>
+          <p>\begin{align*}
+            F_{n}(x)\sim\Phi(x)&-\frac{\beta_{1}(x^2-1)}{6\sqrt{n}}\phi(x)\\
+                                &-(\frac{\beta_{2}(x^3-3x)}{24n}+\frac{\beta_{1}^2(x^5-10x^3+15x)}{72n})\phi(x)
+              \end{align*}
+          </p>
+          <p>ただし、\(\beta_{1}=E[(X-\mu)^3]/\sigma^3\)は歪度、\(\beta_{2}=E[(X-\mu)^4]/\sigma^4-3\)は尖度、</p>
+          <p>\(\phi(x)\)は標準正規分布の密度関数であり、</p>
+          <p>\begin{align*}
+                \phi(x) = \frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})
+              \end{align*}
+          </p>である。
+          <p>この近似式は、両辺の差にnをかけたものが\(n\to\infty\)のときに0に収束する、</p>
+          <p>という意味で理解されるべきである。</p>
+          <p></p>
+          <img class="graph2" src="yugami.png">
+          <img class="graph2" src="togari.png">
+        </div>
+        <div class="border">
+          <p>4次のモーメントを仮定すると、次の条件の下で上の展開は正しい。</p>
+          <p>\begin{align*}
+              \lim_{|t|\to \infty}\sup|E[\exp(itX)]| < 1
+              \end{align*}
+          </p>
+          <p>この条件はクラメール条件として知られている。</p>
+          <p>詳細：Feller(1966, Vol. 2, Chap. XVI.4)</p>
+        </div>
+        <div class="border">
+          <p>この近似を詳しく見ると、</p>
+          <p>\(\underline{第一項}\)</p>
+          <p>\(\Phi(x)\)</p>
+          <p>中心極限定理で得られる近似そのもの。</p>
+          <p>\(\underline{第二項}\)</p>
+          <p>\(\frac{\beta_{1}(x^2-1)}{6\sqrt{n}}\phi(x)\)</p>
+          <p>歪度の補正を与えている。</p>
+          <p>\(\beta_{1}=0\)のときこの項は0になるので、仮定している分布が対称なら</p>
+          <p>中心極限定理の近似は1/n未満の次数の項まで正確である。</p>
+          <p>\(\underline{第三項}\)</p>
+          <p>\((\frac{\beta_{2}(x^3-3x)}{24n}+\frac{\beta_{1}^2(x^5-10x^3+15x)}{72n})\phi(x)\)</p>
+          <p>尖度(と歪度)に対する補正である。</p>
+        </div>
+        <div class="border">
+          <p>\(\underline{漸近展開}\)</p>
+          <p>エッジワース展開は漸近展開である。</p>
+          <p>つまり、nを固定してさらに展開しても精度は悪くなるかもしれない。</p>
+        </div>
+        <div class="border">
+          <p>例</p>
+          <p>n=5とし、\(X_{1},...,X_{5}\)は、区間\((0,\infty)\)上の密度関数\(\exp(-x)\)を持つ</p>
+          <p>指数分布からの標本とする。</p>
+          <p>この分布では\(\mu=1,\sigma^2=1,\beta_{1}=2,\beta_{2}=6\)である。</p>
+          <p>ここで、\(\Phi(x)\)は正規近似、</p>
+          <p>\(E_{1}(x)\)は</p>
+          <p>\begin{align*}
+            E_{1}(x)=\Phi(x)-\frac{\beta_{1}(x^2-1)}{6\sqrt{n}}\phi(x)
+            \end{align*}
+          </p>
+          <p>\(E_{2}(x)\)は</p>
+          <p>\begin{align*}
+            E_{2}(x)=\Phi(x)&-\frac{\beta_{1}(x^2-1)}{6\sqrt{n}}\phi(x)\\
+                                &-(\frac{\beta_{2}(x^3-3x)}{24n}+\frac{\beta_{1}^2(x^5-10x^3+15x)}{72n})\phi(x)
+              \end{align*}
+          </p>
+          <p>Exactは\(F_{n}(x)\)である。</p>
+          <p>表5.1 正規分布と、指数分布からの標本数5の標本平均の正規化に対する</p>
+          <p>\(\ \ \ \ \ \ \ \ \ \)エッジワース展開</p>
+          <img class="graph1" src="table1.png">
+          <p>確かに近似の精度は向上している。</p>
+          <p>ただし、\(E_{1},E_{2}\)が負の値になるときは、0で置き換える。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container markdown-left">
+      <a href="1page.html#thema"><p>前ページ</p></a>
+      <a href="#abs"><p>概要</p></a>
+      <a href="#theorem1">1. 中心極限定理</a>
+      <a href="#jump1-1"><p>1.1 定理5</p></a>
+      <a href="#jump1-2"><p>1.2 リンドバーグ・フェラーの定理</p></a>
+      <a href="#theorem2"><p>2. 例</p></a>
+      <a href="#exm1"<p>2.1 例5.1</p></a>
+      <a href="#exm2"><p>2.2 例5.2</p></a>
+      <a href="#exm3"><p>2.3 例5.3</p></a>
+      <a href="#theorem3"><p>3. 近似の改善</p></a>
+      <a href="#jump3-1"><p>3.1 ベリー・エシーンの定理</p></a>
+      <a href="#jump3-2"><p>3.2 エッジワース展開</p></a>
+    </div>
+    <script type="text/javascript" src=“2page.js”></script>
+  </body>
+</html>

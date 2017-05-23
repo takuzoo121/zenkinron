@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例5.2</title>
+    <link href="proof1.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <p>(証明)</p>
+    <p>t統計量が漸近正規性をもつことを示す。</p>
+    <p>まず統計量\(\bar{Z}_{n}\)が漸近正規性をもつことを示す。</p>
+    <p>証明条件より</p>
+    <p>\begin{align*}
+      &\frac{1}{B_{n}^2}\sum_{j=1}^{n}E[Z_{j}^{2} I(|Z_{j}|\geq \varepsilon B_{n})]\\
+      =& \frac{1}{B_{n}^2}\sum_{j=1}^{n}z_{j}^2 I(|z_{j}|>\varepsilon B_{n})\ \ \ (確率変数Z_{j}は\pm|z_{j}|しか取らないので)\\
+      \leq& \frac{1}{B_{n}^2}\sum_{j=1}^{n}z_{j}^{2} I(\max_{j\leq n}|z_{j}|>\varepsilon B_{n})\\
+      =& I(\max_{j\leq n}|z_{j}|>\varepsilon B_{n}) \frac{1}{B_{n}^2}\sum_{j=1}^{n}z_{j}^{2}\\
+      =& I(\max_{j\leq n}|z_{j}|>\varepsilon B_{n})\\
+      =& I(\frac{\max_{j\leq n}z_{j}^2}{B_{n}^2}>\varepsilon^{2})\\
+      \to& I(0 > \varepsilon^{2})\\
+      \to& 0
+      \end{align*}
+    </p>よってリンドバーグ条件を満たし、</p>
+    <p>\(\sum_{j=1}^{n}Z_{j}/B_{n}=\sqrt{n}\bar{Z}_{n}/\sigma_{n}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\)を得る。</p>
+    <p>さらに証明条件より、t統計量と統計量\(\sqrt{n}\bar{Z}_{n}/\sigma_{n}\)は同値なので、</p>
+    <p>t統計量も漸近正規性をもつ。</p>
+    <p>また、漸近的には通常のt検定と同じ棄却点をもつことがいえる。</p>
+    <p>これより、標本数が多いとき、</p>
+    <p>確率化t検定は一対比較t検定のノンパラメトリックな正当化であるとみなせる。</p>
+    <a href="2page.html#proof3"><p>(戻る)</p></a>
+    <script type="text/javascript" src=“2page.js”></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例5.1</title>
+    <link href="proof1.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <p>(証明)</p>
+    <p>最小二乗推定量\(\hat{\beta}_{n}\)が正規分布に近似できることを示す(証明条件)。</p>
+    <p>最小二乗推定量\(\hat{\beta}_{n}\)は以下のように変形できる。</p>
+    <p>\begin{align*}
+          \hat{\beta}_{n} &= \frac{\sum_{i=1}^{n}X_{j}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}\ \ \ \ \ (証明条件)\\
+                     &= \frac{\sum_{i=1}^{n}(\alpha+\beta z_{j}+e_{j})(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}X_{i}\\
+                     &= \beta + \frac{\sum_{i=1}^{n}e_{j}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}\ \ \ \ (証明条件)\\
+        \end{align*}
+    </p>\(X_{nj}=e_{j}(z_{j}-\bar{z}_{n})\)とおいて、リンドバーグ条件が満たされていることを示す。
+    <p>\(E[X_{nj}]=E[e_{j}](z_{j}-\bar{z}_{n})=0\)であり、</p>
+    <p>\(V(X_{nj})=E[e_{j}^{2}](z_{j}-\bar{z}_{n})^{2}=\sigma^{2}(z_{j}-\bar{z}_{n})^{2}\)なので、</p>
+    <p>\(B_{n}^{2}=V(\sum_{j=1}^{n}X_{nj})=\sigma^{2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}\)である。ゆえに</p>
+    <p>\begin{align*}
+          &\frac{1}{B_{n}^{2}}\sum_{j=1}^{n}E[X_{nj}^{2}I(|X_{nj}|\geq\varepsilon B_{n})]\\
+          =& \frac{1}{B_{n}^{2}}\sum_{j=1}^{n}E[e_{j}^2(z_{j}-\bar{z}_{n})^2I(|e_{j}(z_{j}-\bar{z}_{n})|\geq\varepsilon B_{n})]\\
+          \leq& \frac{1}{B_{n}^2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2E[e_{j}^2 I(|e_{j}|\geq \frac{\varepsilon B_{n}}{\max_{j\geq n}(z_{j}-\bar{z}_{n})})]\ \ \ \ (証明条件)\\
+            =& \frac{1}{B_{n}^2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2 E[e_{j}^2 I(|e_{j}|\geq \frac{\varepsilon \sigma}{\gamma_{n}})]\\
+            =& E[e^2 I(|e|\geq \frac{\varepsilon \sigma}{\gamma_{n}})] \frac{1}{B_{n}^2} \sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2\ \ \ \ (証明条件)\\
+            =& E[e^2 I(|e|\geq \frac{\varepsilon \sigma}{\gamma_{n}})] \frac{1}{\sigma^2}
+        \end{align*}
+    </p>ここで、\(\gamma_{n}^{2}=\max_{j\geq n}(z_{j}-\bar{z}_{n})^{2}/\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2\)とおいた。
+    <p>仮定bより、\(\gamma_{n}^{2}\to 0\)より、</p>
+    <p>\begin{align*}
+          E[e^2 I(|e|\leq \frac{\varepsilon \sigma}{\gamma_{n}})] \to 0
+        \end{align*}
+    </p>となり、リンドバーグ条件を満たし、
+    <p>\begin{align*}
+          \frac{\sum_{j=1}^{n}e_{j}(z_{j}-\bar{z}_{n})}{\sigma\sqrt{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2}}\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)
+        \end{align*}
+    </p>が成り立つ。
+    <p>これを\(\hat{\beta}_{n}\)を用いて書くと</p>
+    <p>\begin{align*}
+          \hat{\beta}_{n} &= \beta + \frac{\sum_{i=1}^{n}e_{j}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}より\\
+          \frac{(\hat{\beta}_{n}-\beta)\sqrt{\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2}}{\sigma} & \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)\\
+          \sqrt{n}s_{n}(\hat{\beta}_{n}-\beta) & \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,\sigma^2)
+        \end{align*}
+    </p>が得られる。ただし、\(s_{n}^{2}=(1/n)\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^{2}\)である。
+    <p>以上より、仮定(a),(b)の下で最小二乗推定量\(\hat{\beta}_{n}\)が正規分布に近似できることが示された。</p>
+    <a href="2page.html#proof2"><p>(戻る)</p></a>
+    <script type="text/javascript" src=“2page.js”></script>
+  </body>
+</html>

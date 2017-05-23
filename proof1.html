@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>定理5</title>
+    <link href="proof1.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <p>(証明)</p>
+    <p>確率変数\(\sqrt{n}(\bar{\bf{X}}_{n}-\bf{\mu})\)が正規分布に法則収束することを</p>
+    <p>特性関数を用いて示す(証明条件より)。</p>
+    <p>\begin{align*}
+        \sqrt{n}(\bar{\bf{X}}_{n}-\bf{\mu}) &= \sqrt{n}\sum_{j=1}^{n}(\frac{\bf{X}_{j}}{n}-\frac{\bf{\mu}}{n})\\
+                                  &=\frac{1}{\sqrt{n}}\sum_{j=1}^{n}(\bf{X}_{j}-\bf{\mu})
+        \end{align*}
+    </p>なので、
+    <p>\begin{align*}
+          \varphi_{\sqrt{n}(\bar{\bf{X}}_{n}-\bf{\mu})}(\bf{t}) &= \varphi_{\frac{1}{\sqrt{n}}\sum_{j=1}^{n}(\bf{X}_{j}-\bf{\mu})}(\bf{t})\\
+                          &= \varphi_{\sum_{j=1}^{n}(\bf{X}_{j}-\bf{\mu})}(\frac{1}{\sqrt{n}}\bf{t})(証明条件)\\
+                          &= \prod_{j=1}^{n}\varphi_{\bf{X}_{j}-\bf{\mu}}(\frac{1}{\sqrt{n}}\bf{t})(証明条件)\\
+                          &= \varphi(\frac{1}{\sqrt{n}}\bf{t})^{n}
+        \end{align*}
+    </p>が得られる。ただし、\(\varphi(\bf{t})\)は\(\bf{X}-\bf{\mu}\)の特性関数である。
+    <p>このとき、\(\varphi(\bf{0})=\rm{1},\dot{\varphi}(\bf{0})=\bf{0}^{T}\)であり(証明条件)、</p>
+    <p>\(\bf{t}\to\bf{0}\)のとき\(\ddot{\varphi}(\bf{t})\to -\Sigma\)なので(証明条件)、テイラー展開より</p>
+    <p>\begin{align*}
+        \varphi_{\sqrt{n}(\bar{\bf{X}}_{n}-\bf{\mu})}(\bf{t}) &= \left(\varphi(\bf{0}) + \dot{\varphi}(\bf{0})\frac{\rm{1}}{\sqrt{\rm{n}}}\bf{t} + \frac{\rm{1}}{\sqrt{\rm{n}}}\bf{t}^{T}\int_{0}^{1}\int_{0}^{1}\rm{v}\ddot{\phi}(\rm{uv}\frac{\rm{1}}{\sqrt{\rm{n}}}\bf{t})\rm{dudv})\frac{\rm{1}}{\sqrt{\rm{n}}}\bf{t}\right)^{\rm{n}}\\
+              &= \left(1 + \frac{1}{n}\int_{0}^{1}\int_{0}^{1}\rm{v}\bf{t}^{T}\ddot{\phi}(\frac{\rm{uv}}{\sqrt{\rm{n}}}\bf{t})\bf{t}\rm{dudv}\right)^{\rm{n}}\\
+              &\to \exp\left(\lim_{n\to\infty}\int_{0}^{1}\int_{0}^{1}\rm{v}\bf{t}^{T}\ddot{\rm{\varphi}}(\frac{\rm{uv}}{\rm{\sqrt{n}}}\bf{t})\bf{t}\rm{dudv}\right)(証明条件)\\
+              &\to \exp\left(\int_{0}^{1}\int_{0}^{1}\rm{v}\bf{t}^{T}(-\bf{\Sigma})\bf{t}\rm{dudv}\right)\\
+              &= \exp(-\frac{1}{2}\bf{t}^{T}\Sigma\bf{t})
+        \end{align*}
+    </p>が得られる。よって、\(\sqrt{n}(\overline{\bf{X}}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(\bf{0},\bf{\Sigma})\)が成り立つ(証明条件より)。
+    <a href="2page.html#proof1"><p>(戻る)</p></a>
+    <script type="text/javascript" src=“2page.js”></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>例5.3</title>
+    <link href="proof1.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <p>(証明)</p>
+    <p>\(W_{+}\)が漸近正規性をもつことを示す。</p>
+    <p>\(W_{n}\)を以下で定義する。</p>
+    <p>\begin{align*}
+          W_{n} &= \sum_{j=1}^{n}jI(Z_{j}>0) - \sum_{j=1}^{n}jI(Z_{j}< 0)\\
+                &= \sum_{j=1}^{n}jI(Z_{j}>0) - (\sum_{j=1}^{n}j-\sum_{j=1}^{n}jI(Z_{j}>0))\\
+                &= 2W_{+} - \sum_{j=1}^{n}j
+        \end{align*}
+    </p>ここで、例題5.2の統計量\(\bar{Z}_{n}\)を思い出すと、
+    <p>\(\bar{Z}_{n}=(1/n)\sum_{j=1}^{n}Z_{j}\)かつ\(P(Z_{j}=|z_{j}|)=P(Z_{j}=-|z_{j}|)=1/2\)であり、</p>
+    <p>\begin{align*}
+          \bar{Z}_{n}=\frac{1}{n}\left(\sum_{j=1}^{n}|z_{j}|P(Z_{j}=|z_{j}|)+\sum_{j=1}^{n}(-|z_{j}|)P(Z_{j}=-|z_{j}|)\right)
+        \end{align*}これは、\(|z_{j}|=j\)とした\((1/n)W_{n}\)そのものである。</p>
+    <p>よって、\((1/n)W_{n}\)が漸近正規性をもつかどうかは、</p>
+    <p>数列\(|z_{j}|=j\)が以下の条件を満たすか調べれば良い。</p>
+    <p>\begin{align*}
+          \frac{\max_{j\leq n}j^2}{\sum_{j=1}^{n}j^2}\to 0\ \ \ \ (例題5.2の仮定)
+        \end{align*}
+    </p>ここで、\(\max_{j\leq n}j^{2}=n^{2}\)と、\(\sum_{j=1}^{n}j^{2}=n(n+1)(2n+1)/6\)より</p>
+    <p>明らかに成り立つ。</p>
+    <p>よって、\(W_{n}\)は漸近正規性を持ち、</p>
+    <p>さらに\(W_{n}\)と線形関係にある\(W_{+}\)も漸近正規性をもち、</p>
+    <p>\((W_{+}-E[W_{+}])/\sqrt{V(W_{+})} \stackrel{\mathcal{L}}{\longrightarrow }\mathcal{N}(0,1)\)</p>
+
+    <a href="2page.html#proof4"><p>(戻る)</p></a>
+    <script type="text/javascript" src=“2page.js”></script>
+  </body>
+</html>

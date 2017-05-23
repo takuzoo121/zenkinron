@@ -1,0 +1,5 @@
+.about-book {
+  color: black;
+  display: inline-block;/*classでブロック化して横並び*/
+  vertical-align: top;/*上揃え*/
+}
