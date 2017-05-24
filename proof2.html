@@ -18,9 +18,9 @@
     <p>最小二乗推定量\(\hat{\beta}_{n}\)が正規分布に近似できることを示す(証明条件)。</p>
     <p>最小二乗推定量\(\hat{\beta}_{n}\)は以下のように変形できる。</p>
     <p>\begin{align*}
-          \hat{\beta}_{n} &= \frac{\sum_{i=1}^{n}X_{j}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}\ \ \ \ \ (証明条件)\\
-                     &= \frac{\sum_{i=1}^{n}(\alpha+\beta z_{j}+e_{j})(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}X_{i}\\
-                     &= \beta + \frac{\sum_{i=1}^{n}e_{j}(z_{i}-\bar{z}_{n})}{\sum_{i=1}^{n}(z_{i}-\hat{z}_{n})^2}\ \ \ \ (証明条件)\\
+          \hat{\beta}_{n} &= \frac{\sum_{j=1}^{n}X_{j}(z_{j}-\bar{z}_{n})}{\sum_{j=1}^{n}(z_{j}-\hat{z}_{n})^2}\ \ \ \ \ (証明条件)\\
+                     &= \frac{\sum_{j=1}^{n}(\alpha+\beta z_{j}+e_{j})(z_{j}-\bar{z}_{n})}{\sum_{j=1}^{n}(z_{j}-\hat{z}_{n})^2}X_{j}\\
+                     &= \beta + \frac{\sum_{j=1}^{n}e_{j}(z_{j}-\bar{z}_{n})}{\sum_{j=1}^{n}(z_{j}-\hat{z}_{n})^2}\ \ \ \ (証明条件)\\
         \end{align*}
     </p>\(X_{nj}=e_{j}(z_{j}-\bar{z}_{n})\)とおいて、リンドバーグ条件が満たされていることを示す。
     <p>\(E[X_{nj}]=E[e_{j}](z_{j}-\bar{z}_{n})=0\)であり、</p>
@@ -29,12 +29,12 @@
     <p>\begin{align*}
           &\frac{1}{B_{n}^{2}}\sum_{j=1}^{n}E[X_{nj}^{2}I(|X_{nj}|\geq\varepsilon B_{n})]\\
           =& \frac{1}{B_{n}^{2}}\sum_{j=1}^{n}E[e_{j}^2(z_{j}-\bar{z}_{n})^2I(|e_{j}(z_{j}-\bar{z}_{n})|\geq\varepsilon B_{n})]\\
-          \leq& \frac{1}{B_{n}^2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2E[e_{j}^2 I(|e_{j}|\geq \frac{\varepsilon B_{n}}{\max_{j\geq n}(z_{j}-\bar{z}_{n})})]\ \ \ \ (証明条件)\\
+          \leq& \frac{1}{B_{n}^2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2E[e_{j}^2 I(|e_{j}|\geq \frac{\varepsilon B_{n}}{\max_{j\leq n}(z_{j}-\bar{z}_{n})})]\ \ \ \ (証明条件)\\
             =& \frac{1}{B_{n}^2}\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2 E[e_{j}^2 I(|e_{j}|\geq \frac{\varepsilon \sigma}{\gamma_{n}})]\\
             =& E[e^2 I(|e|\geq \frac{\varepsilon \sigma}{\gamma_{n}})] \frac{1}{B_{n}^2} \sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2\ \ \ \ (証明条件)\\
             =& E[e^2 I(|e|\geq \frac{\varepsilon \sigma}{\gamma_{n}})] \frac{1}{\sigma^2}
         \end{align*}
-    </p>ここで、\(\gamma_{n}^{2}=\max_{j\geq n}(z_{j}-\bar{z}_{n})^{2}/\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2\)とおいた。
+    </p>ここで、\(\gamma_{n}^{2}=\max_{j\leq n}(z_{j}-\bar{z}_{n})^{2}/\sum_{j=1}^{n}(z_{j}-\bar{z}_{n})^2\)とおいた。
     <p>仮定bより、\(\gamma_{n}^{2}\to 0\)より、</p>
     <p>\begin{align*}
           E[e^2 I(|e|\leq \frac{\varepsilon \sigma}{\gamma_{n}})] \to 0
