@@ -1,0 +1,152 @@
+body {
+  margin-top: 0px;
+  background-color: white;
+}
+
+.bottom {
+  padding-bottom: 100px;
+}
+
+/*header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 25px;
+  opacity: 1;
+  background-color: black;
+  z-index: 10;
+}
+
+header a {
+  display: inline-block;
+  margin-top: 0px;
+  margin-left: 40px;
+  color: white;
+}*/
+
+.container {
+  background-color: white;
+  float: right;
+}
+
+.markdown-body {
+  width: 74%;
+  background-color: lavender;
+}
+
+.markdown-left {
+  position: fixed;
+  width: 25%;
+  height: 100%;
+  background-color: lightsteelblue;
+}
+
+#abs {
+  padding-left: 20px;
+  margin: 0px;
+}
+
+.abstract {
+  margin-bottom: 100px;
+  /*border: 1px solid;*/
+  /*width: 60%;*/
+  padding: 0px;
+  width: 620px;
+}
+
+.abstract p {
+  padding: 0px;
+  margin: 0px;
+  /*border: 1px solid;*/
+  /*display: none;*/
+}
+
+.abstract li{
+  margin: 0px;
+}
+
+.abstract .pad {
+  padding-top: 20px;
+}
+
+.abstract .indent {
+  padding-left: 33px;
+}
+
+.contexts {
+  width: 650px;
+  margin-bottom: 50px;
+  /*display: none;*/
+}
+
+.context {
+  margin-top: 40px;
+}
+
+.border {
+  border: 1px solid;
+  margin: 10px;
+  /*width: 82%;*/
+}
+
+.border p {
+  margin: 5px;
+}
+
+.border li {
+  margin: 10px;
+}
+
+.underbar {
+  border-bottom: 1px solid;
+}
+
+#theorem1 {
+  /*padding-top: 50px;*/
+  /*margin-top: 200px;
+  color: blue;*/
+}
+
+#theorem2 {
+  /*padding-top: 25px;
+  margin-top: 200px;
+  color: blue;*/
+}
+
+#theorem3 {
+  /*padding-top: 25px;
+  margin-top: 200px;
+  color: blue;*/
+}
+
+#click,#click2,#click3,#click4 {
+  width: 45px;
+}
+
+#hide,#hide3,#hide4 {
+  display: none;
+}
+
+.graph1 {
+  margin: 10px 100px;
+  width: 70%;
+}
+
+.graph2 {
+  /*float: left;*/
+  height: 150px;
+  width: 40%;
+  padding: 10px;
+}
+
+.graph3 {
+  margin: 10px 10px;
+  width: 42%;
+  height: 200px;
+}
+
+.graph4 {
+  height: 100px;
+  width: 50%;
+  padding:10px;
+}

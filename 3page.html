@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A COURSE IN LARGE SAMPLE THEORY</title>
+    <link href="3page.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="2page.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <!--<header>
+      <a href="1page.html#thema">前ページ</a>
+      <a href="#abs">概要</a>
+      <a href="#theorem1">1.中心極限定理</a>
+      <a href="#theorem2">2.例</a>
+      <a href="#theorem3">3.近似の改善</a>
+    </header>-->
+    <div class="container markdown-body">
+      <h1 id="thema">第13章 標本分位点の漸近分布 </h1>
+
+      <div class="abstract border">
+        <h2 id="abs">概要</h2>
+        <ol>
+          <li>導入</li>
+          <p>1.1 順序統計量</p>
+          <p class="indent"></p>
+          <p>1.2 p-分位点</p>
+          <p class="indent"></p>
+          <p>1.3 目的</p>
+          <p class="indent"></p>
+          <p>1.4 方法</p>
+          <p class="indent"></p>
+          <p>1.5 流れ</p>
+          <li class="pad">補題</li>
+          <p>2.1 補題13.1</p>
+          <p class="indent"></p>
+          <p>2.2 補題13.2</p>
+          <p class="indent"></p>
+          <li class="pad">定理</li>
+          <p>3.1 定理13</p>
+          <p class="indent"></p>
+          <p>3.2 系</p>
+          <p class="indent"></p>
+          <p>3.3 補足</p>
+          <p class="indent"></p>
+          <p>3.4 例13.1</p>
+          <li class="pad">漸近相対効率</li>
+          <p>4.1 漸近相対効率</p>
+          <p class="indent"></p>
+          <p>4.2 例13.2</p>
+        </ol>
+      </div>
+
+      <div class="contexts">
+        <h2 id="theorem1">1. 導入</h2>
+        <p>用語紹介とこの章の目的</p>
+        <h3 id="jump1-1">1.1 順序統計量</h3>
+        <p>\(X_{1},\cdots,X_{n}\)を(連続)確率分布Fに従うi.i.dな確率変数列とする。</p>
+        <p>これらの観測値は全て異なるとする。</p>
+        <p>その観測値の大きさ順に確率変数列を並べ替えて、</p>
+        <p>\(X_{(n:1)} < X_{(n:2)} < \cdots < X_{(n:n)}\)</p>
+        <p>と書ける。このとき、これらを\(\bf{順序統計量}\)という。</p>
+        <p>また、簡単のために通常、この表記からnを除いて</p>
+        <p>\(X_{(1)} < X_{(2)} < \cdots < X_{(n)}\)</p>
+        <p>と書く。</p>
+        <h3 id="jump1-2">1.2 p-分位点</h3>
+        <p>①p-分位点(=\(x_p\))</p>
+        <img class="graph2" src="fig13_1.gif">
+        <p>②p-標本分位点(=\(X_{(k)}\))</p>
+        <img class="graph2" src="fig13_2.png">
+        <p>ここで\(k\)は\(k=\lceil np \rceil\)である。(\(np\leq k < np+1\))</p>
+        <p>ただし、簡単のために本書ではp-標本分位点を\(X_{(np)}\)と書く。</p>
+        <h3 id="jump1-3">1.3 目的</h3>
+        <p>\(\underline{条件}\)</p>
+        <p>分布Fに密度f(x)が存在して、連続であり、いくつかの分位点の近傍で正値をとる。</p>
+        <p>\(\underline{示したいこと}\)</p>
+        <p>対応する標本分位点の同時分布は漸近正規性をもつこと。</p>
+        <p>ただし、簡単のために2つの分位点について考える。</p>
+        <p>例：</p>
+        <p>分位点\(x_{p_1},x_{p_2}\)に対する標本分位点\(X_{np_1},X_{np_2}\)の同時分布が</p>
+        <p>漸近正規性をもつことを示す。</p>
+        <h3 id="jump1-4">1.4 方法</h3>
+        <p>分布Fからの順序統計量\(X_{(i)},i=1,\cdots,n\)を累積分布関数で変換すると、</p>
+        <p>\(0 < F(X_{(1)}=x_{(1)}) < F(X_{(2)}=x_{(2)}) < \cdots < F(X_{(n)}=x_{(n)}) < 1\)</p>
+        <p>を満たし、\(U_{(i)}=F(X_{(i)})\)は一様分布u(0,1)からの標本の順序統計量とみなせる。</p>
+        <p>そこで、まず一様分布からの順序統計量が漸近正規性をもつことを証明する(=定理13)。</p>
+        <p>その後、逆変換\(g(u)=F^{-1}(u)\)に対してクラメールの定理(7章)を用いて</p>
+        <p>一般の分布からの順序統計量についても漸近正規性をもつことを証明する。</p>
+        <h3 id="jump1-5">1.5 流れ</h3>
+        <ol>
+          <li>連続な分布Fからの順序統計量\(X_{(1)},\cdots,X_{(n)}\)のうち適当な2つの同時分布が</li>
+          <p>漸近正規性をもつことを示したい。</p>
+          <p>\(\to\)系(ゴール)</p>
+          <li>しかし、直接示せない。</li>
+          <p>そこで、まず一様分布の順序統計量の同時分布が漸近正規性をもつことを示す。</p>
+          <p>\(\to\)定理13</p>
+          <li>しかし、これも直接求まらない。</li>
+          <p>一様分布の順序統計量の同時分布が指数分布を用いた別の確率変数の同時分布と</li>
+          <p>等価であることを示す。</p>
+          <p>\(\to\)補題13.1(証明なし)</p>
+          <li>しかし、その指数分布を用いた確率変数の同時分布が漸近正規性をもつことも</li>
+          <p>直接求まらない。</p>
+          <p>ただし、その同時分布の一部が漸近正規性を漸近正規性をもつことが示せる。</p>
+          <p>\(\to\)補題13.2</p>
+          <li>補題13.1と補題13.2とクラメールの定理を用いて定理13が示せる。</li>
+          <li>定理13とクラメールの定理を用いて系が示せる。</li>
+        </ol>
+
+      </div>
+      <div class="contexts">
+        <h2 id="theorem2">2. 補題</h2>
+        <p>定理13を示すための補題2つ</p>
+        <!--<div class="context">-->
+        <h3 id="jump2-1">2.1 補題13.1</h3>
+        <div class="border">
+          <h4>\(\underline{補題13.1}\)</h4>
+          <p>\(Y_{1},Y_{2},\cdots,Y_{n+1}\)はi.i.d.で平均1の指数分布に従う確率変数とする。</p>
+　　　　　　<p>また、\(S_{k}=\sum_{i=1}^{k}Y_{i},k=1,\cdots,n+1\)と定義する。</p>
+          <p>このとき、</p>
+          <p>\begin{align*}
+                \left( \frac{S_1}{S_{n+1}},\cdots,\frac{S_{n}}{S_{n+1}} \right)
+              \end{align*}
+          </p>の分布は、一様分布u(0,1)からの大きさnの標本から求められる順序統計量
+          <p>\begin{align*}
+                (U_{(1)},\cdots,U_{(n)})
+              \end{align*}
+          </p>の分布と同じである。
+        </div>
+        <div class="border">
+          <p>\(\underline{指数分布}\)</p>
+          <p>確率密度関数 : \(f(y)=\frac{1}{\theta}\exp(-\frac{y}{\theta})I(y>0)\)</p>
+          <p>平均 : \(E[y]=\frac{1}{\theta}\)</p>
+          <p>分散 : \(V(y)=\frac{1}{\theta^{2}}\)</p>
+        </div>
+        <p>この補題より\((U_{(k_{1})},U_{(k_{2})})(1\leq k_1 < k_2 \leq n)\)の同時分布は</p>
+        <p>\begin{align}
+              \left( \frac{S_{k_{1}}}{S_{n+1}},\frac{S_{k_{2}}}{S_{n+1}} \right)
+            \end{align}
+        </p>と同じ分布になる。
+        <p>これは、7章の方法で漸近正規性をもつことがわかる。</p>
+        <h3 id="jump2-2">2.2 補題13.2</h3>
+        <div class="border">
+          <p>\(\underline{補題13.2}\)</p>
+          <p>\(Y_1,Y_2,\cdots,Y_{n+1}\)はi.i.d.で平均1の指数分布に従う確率変数とする。</p>
+          <p>また、\(n\to \infty\)のとき、\(\sqrt{n}(k_1/n - p_1)\to 0\)かつ\(\sqrt{n}(k_2/n-p_2)\to 0\)とする。</p>
+          <p>このとき、</p>
+          <p>\begin{align*}
+            \sqrt{n+1}\left(
+              \begin{array}{c}
+                \frac{S_{k_1}}{n+1}-p_1 \\
+                \frac{(S_{k_2}-S_{k_1})}{n+1}-(p_2-p_1) \\
+                \frac{(S_{n+1}-S_{k_2})}{n+1}-(1-p_1)
+              \end{array}
+            \right)
+            \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+            \end{align*}
+          </p>が成り立つ。ただし
+          <p>\begin{align*}
+                \bf{\Sigma} = \left(
+                  \begin{array}{ccc}
+                    p_1 & 0 & 0\\
+                    0 & p_2 - p_1 & 0\\
+                    0 & 0 & 1-p_2
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>である。
+        </div>
+        <h3>証明条件</h3>
+        <div class="border">
+          <p>平均1の指数分布の分散は1であり、</p>
+          <p>\(k \to \infty\)のとき、中心極限定理より
+              \begin{align*}
+                \sqrt{k}\left( \frac{S_{k}}{k}-1 \right)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1)
+              \end{align*}
+          </p>が成り立つ。
+        </div>
+        <div class="border">
+          <p>\(n\to\infty\)のとき\(k_{1}/n\to p_{1}\)であれば次を得る。</p>
+          <p>\begin{align*}
+                \sqrt{n+1}\left( \frac{S_{k_{1}}}{n+1} - \frac{k_{1}}{n+1}\right)
+                &= \sqrt{\frac{k_1}{n+1}}\sqrt{k_{1}}\left( \frac{S_{k_1}}{k_1}-1 \right)\\
+                & \stackrel{\mathcal{L}}{\longrightarrow}\sqrt{p_1}\mathcal{N}(0,1)\\
+                &= \mathcal{N}(0, p_1)
+              \end{align*}
+          </p>同様に、\(n\to \infty\)のとき\(k_1/n\to p_1,k_2/n\to p_2\)であれば以下を得る。
+          <p>\begin{align*}
+                &\sqrt{n+1}\left( \frac{(S_{k_2} - S_{k_1})}{n+1} - \frac{k_2 - k_1}{n+1} \right)\\
+                &= \sqrt{\frac{k_2 - k_1}{n+1}}\sqrt{k_2 - k_1}\left( \frac{\sum_{j=k_1+1}^{k_2}Y_j}{k_2 - k_1} -1 \right)\\
+                &= \sqrt{p_2 - p_1}\mathcal{N}(0,1)\\
+                &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,p_2 - p_1)
+              \end{align*}
+          </p>また、
+          <p>\begin{align*}
+                &\sqrt{n+1}\left( \frac{(S_{n+1} - S_{k_2})}{n+1} - \frac{n+1-k_2}{n+1} \right)\\
+                &= \sqrt{\frac{n+1-k_2}{n+1}}\sqrt{n+1-k_2}\left( \frac{\sum_{j=k_2+1}^{n+1}}{n+1-k_2} - 1 \right)\\
+                &= \sqrt{1-p_2}\mathcal{N}(0,1)\\
+                &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1 - p_2)
+              \end{align*}
+          </p>
+
+        </div>
+
+        <h3>証明</h3>
+        <div class="border">
+          <p>\(S_{k_1},S_{k_2}-S_{k_1},S_{n+1}-S_{k_2}\)は互いに独立である。</p>
+          <p>なぜなら、</p>
+          <p>\begin{align*}
+                S_{k_1} &= \sum_{j=1}^{k_1}Y_{j}\\
+                S_{k-2}-S_{k_1} &= \sum_{j=k_1 +1}^{k_2}Y_{j}\\
+                S_{n+1}-S_{k_2} &= \sum_{j=k_2 +1}^{n+1}Y_{j}
+              \end{align*}
+          </p>であり、\(Y_1,\cdots,Y_{n+1}\)はi.i.d.であるから。
+          <p>また、</p>
+          <p>\begin{align*}
+                \sqrt{n+1}\left( \frac{S_{k_1}}{n+1} - p_1 \right)
+              \end{align*}
+          </p>と
+          <p>\begin{align*}
+                \sqrt{n+1}\left( \frac{S_{k_1}}{n+1} - \frac{k_1}{n+1} \right)
+              \end{align*}
+          </p>の差は、
+          <p>\begin{align*}
+                \sqrt{n+1}\left( \frac{k_1}{n+1} - p_1 \right)
+              \end{align*}
+          </p>であり、これは\(n\to \infty\)で0に収束するので漸近的に同じである。
+          <p>ゆえに、</p>
+          <p>\begin{align*}
+                \sqrt{n+1}\left( \frac{S_{k_1}}{n+1} - p_1 \right)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,p_1)
+              \end{align*}
+          </p>が成り立つ。他の2つも同様に
+          <p>\begin{align*}
+                \sqrt{n+1}\left(\frac{(S_{k_2}-S_{k_1})}{n+1}-(p_2-p_1)\right)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,p_2 - p_1)\\
+                \sqrt{n+1}\left(\frac{(S_{n+1}-S_{k_2})}{n+1}-(1-p_1)\right)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,1-p_2)
+              \end{align*}
+          </p>が成り立つ。
+          <p>よって</p>
+          <p>\begin{align*}
+                \sqrt{n+1}\left(
+                  \begin{array}{c}
+                    \frac{S_{k_1}}{n+1}-p_1 \\
+                    \frac{(S_{k_2}-S_{k_1})}{n+1}-(p_2-p_1) \\
+                    \frac{(S_{n+1}-S_{k_2})}{n+1}-(1-p_1)
+                  \end{array}
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+            \end{align*}
+          </p>が成り立つ。
+        </div>
+      </div>
+      <div class="contexts">
+        <h2 id="theorem3">3. 定理</h2>
+        <h3 id="jump3-1">3.1 定理13</h3>
+        <div class="border">
+          <p>\(\underline{定理13}\)</p>
+          <p>\(U_{(1)} < \cdots < U_{(n)}\)は一様分布u(0,1)からの大きさnの順序統計量とする。</p>
+          <p>\(n\to \infty, k_1 \to \infty, k_2 \to \infty\)において</p>
+          <p>\begin{align*}
+                \sqrt{n}\left( \frac{k_1}{n} - p_1 \right) &\to 0\\
+                \sqrt{n}\left( \frac{k_2}{n} - p_2 \right) &\to 0
+             \end{align*}
+          </p>が成り立つなら、\(0 < p_1 < p_2 < 1\)について以下が成り立つ。
+          <p>\begin{align*}
+                \sqrt{n} \left(
+                  \begin{array}{c}
+                    U_{(k_1)}-p_1 \\
+                    U_{(k_2)}-p_2
+                  \end{array}
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Theta})
+            \end{align*}
+          </p>ただし、
+          <p>\begin{align*}
+                \bf{\Theta} = \left(
+                    \begin{array}{cc}
+                      p_1(1-p_1) & p_1(1-p_2)\\
+                      p_1(1-p_2) & p_2(1-p_2)
+                    \end{array}
+                  \right)
+              \end{align*}
+          </p>である。
+        </div>
+        <h3>証明条件</h3>
+        <div class="border">
+          <h4>補題13.1</h4>
+          <p>\((U_{(k_1)},U_{(k_2)})\)の同時分布は</p>
+          <p>\begin{align*}
+                \left( \frac{S_{k_1}}{S_{n+1}},  \frac{S_{k_2}}{S_{n+1}} \right)
+              \end{align*}
+          </p>と同じ分布になる。
+        </div>
+        <div class="border">
+          <h4>補題13.2</h4>
+          <p>\begin{align*}
+            \sqrt{n+1}&\left(
+              \begin{array}{c}
+                \frac{S_{k_1}}{n+1}-p_1 \\
+                \frac{(S_{k_2}-S_{k_1})}{n+1}-(p_2-p_1) \\
+                \frac{(S_{n+1}-S_{k_2})}{n+1}-(1-p_1)
+              \end{array}
+            \right)
+            \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})\\
+            &\\
+            &\bf{\Sigma} = \left(
+              \begin{array}{ccc}
+                p_1 & 0 & 0\\
+                0 & p_2 - p_1 & 0\\
+                0 & 0 & 1-p_2
+              \end{array}
+            \right)
+            \end{align*}
+          </p>が成り立つ。
+        </div>
+        <div class="border">
+          <h4>クラメールの定理</h4>
+          <p>関数\(g:\mathbb{R}^{d} \to \mathbb{R}^{k}\)の導関数\(\dot{g}(\bf{x})\)は
+            \(\bf{\mu} \in \mathbb{R}^{d}\)の近傍で連続であると仮定する。</p>
+          <p>\begin{align*}
+                \sqrt{n}(\bf{X}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+              \end{align*}
+          </p>ならば、
+          <p>\begin{align*}
+                \sqrt{n}(g(\bf{X}_{n})-\rm{g}(\bf{\mu}))
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\dot{\rm{g}}(\bf{\mu}))\bf{\Sigma}\dot{\rm{g}}(\bf{\mu})^{T})
+              \end{align*}
+          </p>が成り立つ。
+        </div>
+
+        <h3>証明</h3>
+        <div class="border">
+          <p>\begin{align*}
+                \bf{X}_{\rm{n}} = \left(
+                  \begin{array}{c}
+                    \frac{S_{k_1}}{n+1}\\
+                    \frac{S_{k_2}-S_{k_1}}{n+1}\\
+                    \frac{S_{n+1}-S_{k_2}}{n+1}
+                  \end{array}
+                \right),\ \
+                \bf{\mu} = \left(
+                  \begin{array}{c}
+                    p_1\\
+                    p_2-p_1\\
+                    1-p_2
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>とおくと、補題13.2より
+          <p>\begin{align*}
+                \sqrt{n}(\bf{X}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+              \end{align*}
+          </p>が成り立つ。
+          <p>また</p>
+          <p>\begin{align*}
+                g(x_1,x_2,x_3) = \frac{1}{x_1+x_2+x_3}\left(
+                  \begin{array}{c}
+                    x_1\\
+                    x_2
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>とおくと、
+          <p>\begin{align*}
+                g\left(\frac{S_{k_1}}{n+1},\frac{S_{k_2}-S_{k_1}}{n+1},\frac{S_{n+1}-S_{k_2}}{n+1}\right)
+                =\frac{1}{S_{n+1}}\left(
+                  \begin{array}{c}
+                    S_{k_1}\\
+                    S_{k_2}
+                  \end{array}
+                \right)
+            \end{align*}
+          </p>が得られる。これは補題13.1より\((U_{(k_1)}, U_{(k_2)})\)と同じ分布を持つ。
+          <p>よってクラメールの定理より</p>
+          <p>\begin{align*}
+                &\sqrt{n} (g(\bf{X}_{\rm{n}})
+                - \rm{g}(\bf{\mu}) )\\
+                &=\sqrt{n}\left(\frac{1}{S_{n+1}}\left(
+                  \begin{array}{c}
+                    S_{k_1}\\
+                    S_{k_2}
+                  \end{array}
+                \right)
+                - \frac{1}{p_1 + (p_2 - p_1) + (1 - p_2)}\left(
+                  \begin{array}{c}
+                    p_1\\
+                    p_1 + (p_2 - p_1)
+                  \end{array}
+                \right)
+                \right) \\
+                &=
+                \sqrt{n}\left(\frac{1}{S_{n+1}}\left(
+                  \begin{array}{c}
+                    S_{k_1}\\
+                    S_{k_2}
+                  \end{array}
+                \right)
+                -\left(
+                  \begin{array}{c}
+                    p_1\\
+                    p_2
+                  \end{array}
+                \right)
+                \right)\\
+                &=
+                \sqrt{n}\left(
+                  \begin{array}{c}
+                    U_{(k_1)}-p_1\\
+                    U_{(k_2)}-p_2
+                  \end{array}
+                \right)\\
+                &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\dot{\rm{g}}(\bf{\mu})\bf{\Sigma}\dot{\rm{g}}(\bf{\mu})^{T})
+
+              \end{align*}
+          </p>が成り立つ。
+          <p>また、</p>
+          <p>\begin{align*}
+                \dot{g}(x_1, x_2, x_3)=\frac{1}{(x_1 + x_2 + x_3)^{2}}\left(
+                  \begin{array}{ccc}
+                    x_2 + x_3 & -x_1 & -x_1\\
+                    x_3 & x_3 & -(x_1+x_2)
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>より、
+          <p>\begin{align*}
+                \dot{g}(p_1, p_2 - p_1, 1-p_2) = \left(
+                  \begin{array}{ccc}
+                    1-p_1 & -p_1 & -p_1\\
+                    1-p_2 & 1-p_2 & -p_2
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>である。
+          <p>よって、</p>
+          <p>\begin{align*}
+                \bf{\Theta}&=
+                \dot{g}(\bf{\mu})\bf{\Sigma}\dot{\rm{g}}(\bf{\mu})^{T} \\
+                &= \dot{g}(\bf{\mu})\left(
+                  \begin{array}{ccc}
+                    p_1 & 0 & 0\\
+                    0 & p_2 - p_1 & 0\\
+                    0 & 0 & 1-p_2
+                  \end{array}
+                \right)\dot{\rm{g}}(\bf{\mu})^{T}\\
+                &= \left(
+                    \begin{array}{cc}
+                      p_1(1-p_1) & p_1(1-p_2)\\
+                      p_1(1-p_2) & p_2(1-p_2)
+                    \end{array}
+                  \right)
+              \end{align*}
+          </p>がわかる。
+        </div>
+        <h3 id="jump3-2">3.2 系</h3>
+        <div class="border">
+          <p>\(\underline{系}\)</>
+          <p>\(X_{(1)} < \cdots < X_{(N)}\)は、密度fをもつ分布Fからの大きさnの順序統計量とする。</p>
+          <p>ただし、\(0 < p_1 < p_2 < 1\)に対する分位点\(x_{p_1}\)と\(x_{p_2}\)の近傍でf(x)は連続で正であるとする。</p>
+          <p>このとき</p>
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \begin{array}{c}
+                    X_{(np_1)} - x_{p_1}\\
+                    X_{(np_2)} - x_{p_2}
+                  \end{array}
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Gamma})
+             \end{align*}
+          </p>が成り立つ。
+          <p>ただし、</p>
+          <p>\begin{align*}
+                \bf{\Gamma} = \left(
+                  \begin{array}{cc}
+                    \frac{p_1(1-p_1)}{f^2(x_{p_1})} & \frac{p_1(1-p_2)}{f(x_{p_1})f(x_{p_2})}\\
+                    \frac{p_1(1-p_2)}{f(x_{p_1})f(x_{p_2})} & \frac{p_2(1-p_2)}{f^2(x_{p_2})}
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>である。
+        </div>
+        <h3>証明条件</h3>
+        <div class="border">
+          <h4>\(\underline{定義}\)</h4>
+          <p>一様分布からの順序統計量\(U_{i}\)と、分布Fからの順序統計量\(X_{i}\)について</p>
+          <p>\begin{align*}
+                U_{i} = F(X_{i})
+              \end{align*}
+          </p>が成り立つ(Fは累積分布関数)。
+          <p>p-標本分位点において</p>
+          <p>\begin{align*}
+                X_{(k_1)}=X_{(np_1)}
+              \end{align*}
+          </p>である。
+        </div>
+
+        <div class="border">
+          <h4>\(\underline{定理13}\)</h4>
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \begin{array}{c}
+                    U_{(k_1)} - p_1\\
+                    U_{(k_2)} - p_2
+                  \end{array}
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Theta})\\
+                \\
+                \bf{\Theta} = \left(
+                    \begin{array}{cc}
+                      p_1(1-p_1) & p_1(1-p_2)\\
+                      p_1(1-p_2) & p_2(1-p_2)
+                    \end{array}
+                  \right)
+             \end{align*}
+           </p>が成り立つ。
+        </div>
+        <div class="border">
+          <h4>\(\underline{クラメールの定理}\)</h4>
+          <p>関数\(g:\mathbb{R}^{d} \to \mathbb{R}^{k}\)の導関数\(\dot{g}(\bf{x})\)は
+            \(\bf{\mu} \in \mathbb{R}^{d}\)の近傍で連続であると仮定する。</p>
+          <p>\begin{align*}
+                \sqrt{n}(\bf{X}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+              \end{align*}
+          </p>ならば、
+          <p>\begin{align*}
+                \sqrt{n}(g(\bf{X}_{n})-\rm{g}(\bf{\mu}))
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\dot{\rm{g}}(\bf{\mu}))\bf{\Sigma}\dot{\rm{g}}(\bf{\mu})^{T})
+              \end{align*}
+          </p>が成り立つ。
+
+        </div>
+        <h3>証明</h3>
+        <div class="border">
+          <p>\begin{align*}
+                g(y_1,y_2)=\left(
+                  \begin{array}{c}
+                    F^{-1}(y_1)\\
+                    F^{-1}(y_2)
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>とおくと、
+          <p>\begin{align*}
+                \sqrt{n}(g(U_{(k_1)}, U_{(k_2)})-g(p_1, p_2))
+                &= \sqrt{n}\left(\left(
+                      \begin{array}{c}
+                        X_{(k_1)}\\
+                        X_{(k_2)}
+                      \end{array}
+                    \right)
+                    -\left(
+                        \begin{array}{c}
+                          x_{p_1}\\
+                          x_{p_2}
+                        \end{array}
+                    \right)\right)\\
+                &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}
+                (\bf{0},\dot{\rm{g}}(\rm{p_1,p_2})\bf{\Theta}\dot{\rm{g}}(\rm{p_1,p_2})^{T})
+              \end{align*}
+          </p>がわかる。
+          <p>また、\begin{align*}
+                \dot{g}(y_1,y_2)=\left(
+                  \begin{array}{cc}
+                    \frac{1}{f(F^{-1}(y_1))} & 0\\
+                    0 & \frac{1}{f(F^{-1}(y_2))}
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>より、
+          <p>\begin{align*}
+                \dot{g}(p_1, p_2) = \left(
+                  \begin{array}{cc}
+                    \frac{1}{f(x_{p_1})} & 0\\
+                    0 & \frac{1}{f(x_{p_2})}
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>である。
+          <p>よって、</p>
+          <p>\begin{align*}
+                \bf{\Gamma}&=
+                \dot{\rm{g}}(\rm{p_1,p_2})\bf{\Theta}\dot{\rm{g}}(\rm{p_1,p_2})^{T}\\
+                &= \left(
+                  \begin{array}{cc}
+                    \frac{p_1(1-p_1)}{f^2(x_{p_1})} & \frac{p_1(1-p_2)}{f(x_{p_1})f(x_{p_2})}\\
+                    \frac{p_1(1-p_2)}{f(x_{p_1})f(x_{p_2})} & \frac{p_2(1-p_2)}{f^2(x_{p_2})}
+                  \end{array}
+                \right)
+              \end{align*}
+          </p>がわかる。
+          <p>以上より、</p>
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \begin{array}{c}
+                    X_{(np_1)} - x_{p_1}\\
+                    X_{(np_2)} - x_{p_2}
+                  \end{array}
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Gamma})
+             \end{align*}
+          </p>が成り立つ。
+        </div>
+
+        <h3 id="jump3-3">3.3 補足</h3>
+        <p>1つの分位点については、この定理は以下のように書ける。</p>
+        <p>\begin{align*}
+              \sqrt{n}(X_{(np)}-x_{p})
+              \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,\frac{p(1-p)}{f^2(x_p)})
+            \end{align*}
+        </p>よって、\(x_p\)の推定値としての\(X_{(np)}\)は\(1/f(x_p)\)に比例する。
+        <h3 id="jump3-4">3.4 例13.1</h3>
+        <p>正規分布\(\mathcal{N}(\mu,\sigma^2)\)からの大きさnの標本の中央値を\(m_n\)とする。</p>
+        <p>\(\mu\)は0.5-分位点であり、対応する0.5-標本分位点\(X_{n/2}\)は\(m_n\)である。</p>
+        <p>このとき、\(f(\mu)=1/(\sqrt{2\pi}\sigma)\)なので、以下を得る。</p>
+        <p>\begin{align*}
+              \sqrt{n}(m_n - \mu)
+              &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{1/2(1-1/2)}{f^2 (\mu)}\right)\\
+              &= \mathcal{N}\left(0,\frac{\pi \sigma^2}{2}\right)
+            \end{align*}
+        </p>
+        <p>ただし、\(\mu\)の推定値としての\(\bar{X}_{n}\)と比較するなら、中心極限定理より</p>
+        <p>\(\sqrt{n}(\bar{X}_{n}-\mu)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,\sigma^{2})\)である。</p>
+      </div>
+
+      <div class="contexts bottom">
+        <h2 id="theorem4">4. 漸近相対効率</h2>
+        <p>順序統計量は一つの確率変数が漸近正規性を持つことをいっているが、和の場合と比べてどれだけ正確か</p>
+        <h3 id="jump4-1">4.1 定義</h3>
+        <div class="border">
+          <p>\(\underline{相対効率}\)</p>
+          <p>\(\hat{\theta}_{1}\)と\(\hat{\theta}_{2}\)を\(\theta\)の推定値とする。</p>
+          <p>\(\sqrt{n}(\hat{\theta}_{1}-\theta)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,\sigma_{1}^{2})\)
+          と\(\sqrt{n}(\hat{\theta}_{2}-\theta)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(0,\sigma_{2}^{2})\)</p>
+          <p>であるとき、\(\hat{\theta}_{2}\)に対する\(\hat{\theta}_{1}\)の相対効率は\(\sigma_{2}^{2}/\sigma_{1}^{2}\)で
+          定義される。</p>
+        </div>
+        <p>例13.1での\(\mu\)の推定値として中央値\(m_{n}\)の平均\(\bar{X}_{n}\)に対する</p>
+        <p>相対効率は\(\sigma^{2}/(\pi\sigma^{2}/2)=2/\pi\fallingdotseq0.64\)である。</p>
+        <p>これより、正規母集団の平均\(\mu\)を推定するのに\(\bar{X}_{n}\)の代わりに</p>
+        <p>\(m_{n}\)を用いる場合、大標本では観測値の36%を捨てていることに等しい。</p>
+        <p>分散大きい。</p>
+        <p>標本集めて、並び替えたものの一つを用いると、全ての標本を用いて推定した時の64%の性能</p>
+        <p>一個で64%分の働きならかなりよくね？</p>
+
+        <h3 id="jump4-2">4.2 例13.2</h3>
+          <p>コーシー分布の密度は以下で与えられる。</p>
+          <p>\begin{align*}
+                f(x) = \left( \frac{1}{\pi\sigma}\frac{1}{1+(x-\mu)^{2}/\sigma^{2}} \right)
+              \end{align*}
+          </p>平均も分散もない。
+          <p>その中央値は\(\mu\)、第1四分位点は\(x_{1/4}=\mu - \sigma\)であり、第3四分位点は\(x_{3/4}=\mu + \sigma\)である。</p>
+          <p>よって、\(\sigma\)は半四分位範囲である。</p>
+          <p>\begin{align*}
+                \sqrt{n}(m_{n}-\mu)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{\pi^{2}\sigma^{2}}{4}\right)
+              \end{align*}
+          </p>
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \begin{array}{c}
+                    X_{(n/4)} - (\mu - \sigma)\\
+                    X_{(3n/4)} - (\mu + \sigma)
+                  \end{array}
+                 \right)
+                 \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}
+                 \left( \bf{0}, \rm{\pi^2 \sigma^2}\left(
+                   \begin{array}{cc}
+                     3/4 & 1/4\\
+                     1/4 & 3/4
+                   \end{array}
+                  \right)
+                  \right)
+              \end{align*}
+          </p>よって
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \frac{X_{(3n/4)}-X_{(n/4)}}{2} - \sigma
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{\pi^2 \sigma^2}{4}\right)
+              \end{align*}
+          </p>
+
+      </div>
+    </div>
+
+    <div class="container markdown-left">
+      <a href="index.html#thema"><p>前ページ</p></a>
+      <a href="#abs"><p>概要</p></a>
+      <a href="#theorem1">1. 導入</a>
+      <!--
+      <a href="#jump1-1"><p>1.1 順序統計量</p></a>
+      <a href="#jump1-2"><p>1.2 p-分位点</p></a>
+      <a href="#jump1-3"><p>1.3 目的</p></a>
+      <a href="#jump1-4"><p>1.4 方法</p></a>
+      -->
+      <a href="#jump1-5"><p>1.5 流れ</p></a>
+
+      <a href="#theorem2"><p>2. 補題</p></a>
+      <!--
+      <a href="#jump2-1"<p>2.1 補題13.1</p></a>
+      <a href="#jump2-2"><p>2.2 補題13.2</p></a>
+      -->
+      <a href="#theorem3"><p>3. 定理</p></a>
+      <!--
+      <a href="#jump3-1"><p>3.1 定理13</p></a>
+      <a href="#jump3-2"><p>3.2 系</p></a>
+      <a href="#jump3-3"><p>3.3 補足</p></a>
+      <a href="jump3-4"><p>3.4 例13.1</p></a>
+      -->
+      <a href="#theorem4"><p>4. 漸近相対効率</p></a>
+      <!--
+      <a href="jump4-1"><p>4.1 漸近相対効率</p></a>
+      <a href="jump4-2"><p>4.2 例13.2</p></a>
+      -->
+    </div>
+    <script type="text/javascript" src=“3page.js”></script>
+  </body>
+</html>
