@@ -678,6 +678,9 @@
                                    &\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{\pi^{2}\sigma^{2}}{4}\right)
               \end{align*}
           </p>が成り立つ。
+          <p>また、標本半四分位範囲の漸近分布を知りたいときは、</p>
+          <p>まず\(X_{(n/4)}\)とX_{(3n/4)}の漸近同時分布を求める。</p>
+          <p>系より、
           <p>\begin{align*}
                 \sqrt{n}\left(
                   \begin{array}{c}
@@ -694,7 +697,38 @@
                   \right)
                   \right)
               \end{align*}
-          </p>よって
+          </p>が成り立つ。ここで
+          <p>\begin{align*}
+                g(x_1, x_2) = \frac{1}{2}(x_2 - x_1)
+              \end{align*}
+          </p>とおくと、
+          <p>\begin{align*}
+                g(X_{(n/4)},X_{(3n/4)}) &= \frac{1}{2}(X_{(3n/4)}-X_{(n/4)})\\
+                g(\mu-\sigma, \mu+\sigma) &= \sigma
+              \end{align*}
+          </p>が成り立ち、
+          <p>\begin{align*}
+                \dot{g}(x_1,x_2) = \frac{1}{2}(-1, 1)
+              \end{align*}
+          </p>より、
+          <p>\begin{align*}
+                \dot{g}(\mu-\sigma,\mu+\sigma)(\pi^{2}\sigma^{2})\left(
+                  \begin{array}{cc}
+                    3/4 & 1/4\\
+                    1/4 & 3/4
+                  \end{array}
+                \right)
+                \dot{g}(\mu-\sigma,\mu+\sigma)^{T}
+                =\frac{\pi^2 \sigma^2}{4}
+              \end{align*}
+          </p>これより、クラメールの定理より
+          <p>\begin{align*}
+                \sqrt{n}\left(
+                  \frac{X_{(3n/4)}-X_{(n/4)}}{2} - \sigma
+                \right)
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{\pi^2 \sigma^2}{4}\right)
+              \end{align*}
+          </p>となる。
           <p>\begin{align*}
                 \sqrt{n}\left(
                   \frac{X_{(3n/4)}-X_{(n/4)}}{2} - \sigma
