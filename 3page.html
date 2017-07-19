@@ -97,6 +97,20 @@
         <p>そこで、まず一様分布からの順序統計量が漸近正規性をもつことを証明する(=定理13)。</p>
         <p>その後、逆変換\(g(u)=F^{-1}(u)\)に対してクラメールの定理(7章)を用いて</p>
         <p>一般の分布からの順序統計量についても漸近正規性をもつことを証明する。</p>
+        <div class="border">
+          <h4>クラメールの定理</h4>
+          <p>関数\(g:\mathbb{R}^{d} \to \mathbb{R}^{k}\)の導関数\(\dot{g}(\bf{x})\)は
+            \(\bf{\mu} \in \mathbb{R}^{d}\)の近傍で連続であると仮定する。</p>
+          <p>\begin{align*}
+                \sqrt{n}(\bf{X}_{n}-\bf{\mu})\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\bf{\Sigma})
+              \end{align*}
+          </p>ならば、
+          <p>\begin{align*}
+                \sqrt{n}(g(\bf{X}_{n})-\rm{g}(\bf{\mu}))
+                \stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}(\bf{0},\dot{\rm{g}}(\bf{\mu}))\bf{\Sigma}\dot{\rm{g}}(\bf{\mu})^{T})
+              \end{align*}
+          </p>が成り立つ。
+        </div>
         <h3 id="jump1-5">1.5 流れ</h3>
         <ol>
           <li>連続な分布Fからの順序統計量\(X_{(1)},\cdots,X_{(n)}\)のうち適当な2つの同時分布が</li>
