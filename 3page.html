@@ -647,7 +647,6 @@
 
       <div class="contexts bottom">
         <h2 id="theorem4">4. 漸近相対効率</h2>
-        <p>順序統計量は一つの確率変数が漸近正規性を持つことをいっているが、和の場合と比べてどれだけ正確か</p>
         <h3 id="jump4-1">4.1 定義</h3>
         <div class="border">
           <p>\(\underline{相対効率}\)</p>
@@ -661,17 +660,15 @@
         <p>相対効率は\(\sigma^{2}/(\pi\sigma^{2}/2)=2/\pi\fallingdotseq0.64\)である。</p>
         <p>これより、正規母集団の平均\(\mu\)を推定するのに\(\bar{X}_{n}\)の代わりに</p>
         <p>\(m_{n}\)を用いる場合、大標本では観測値の36%を捨てていることに等しい。</p>
-        <p>分散大きい。</p>
-        <p>標本集めて、並び替えたものの一つを用いると、全ての標本を用いて推定した時の64%の性能</p>
-        <p>一個で64%分の働きならかなりよくね？</p>
 
         <h3 id="jump4-2">4.2 例13.2</h3>
           <p>コーシー分布の密度は以下で与えられる。</p>
           <p>\begin{align*}
-                f(x) = \left( \frac{1}{\pi\sigma}\frac{1}{1+(x-\mu)^{2}/\sigma^{2}} \right)
+                f(x) = \frac{1}{\pi\sigma}\frac{1}{1+(x-\mu)^{2}/\sigma^{2}} 
               \end{align*}
-          </p>平均も分散もない。
-          <p>その中央値は\(\mu\)、第1四分位点は\(x_{1/4}=\mu - \sigma\)であり、第3四分位点は\(x_{3/4}=\mu + \sigma\)である。</p>
+          </p>
+          <p>その中央値は\(\mu\)、第1四分位点は\(x_{1/4}=\mu - \sigma\)であり、</p>
+          <p>第3四分位点は\(x_{3/4}=\mu + \sigma\)である。</p>
           <p>よって、\(\sigma\)は半四分位範囲である。</p>
           <p>\begin{align*}
                 \sqrt{n}(m_{n}-\mu)\stackrel{\mathcal{L}}{\longrightarrow}\mathcal{N}\left(0,\frac{\pi^{2}\sigma^{2}}{4}\right)
